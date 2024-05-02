@@ -1,0 +1,27 @@
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* This will make the container take the full height of the viewport */
+}
+
+.form-container {
+  width: 300px; /* Adjust the width as needed */
+  padding: 20px;
+  border: 1px solid #121481; /* Example border */
+  border-radius: 5px; /* Example border radius */
+  background-color: #f9f9f9; /* Example background color */
+}
+
+.outline {
+  border: 1px solid #121481;
+  border-radius: 5px;
+}
+.login-title {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Add some space between the title and the form */
+}
+
+.login-title h2 {
+  font-size: 24px; /* Adjust the font size as needed */
+}
