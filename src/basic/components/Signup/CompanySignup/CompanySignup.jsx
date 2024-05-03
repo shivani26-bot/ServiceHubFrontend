@@ -100,7 +100,10 @@ function CompanySignup() {
           </Form>
           <p>
             Or{" "}
-            <a href="#" className="register-link font-weight-bold fs-6 mb-0">
+            <a
+              href="/login"
+              className="register-link font-weight-bold fs-6 mb-0"
+            >
               login now!
             </a>
           </p>

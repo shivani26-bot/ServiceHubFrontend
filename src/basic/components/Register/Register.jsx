@@ -1,6 +1,10 @@
 import { Card, Button, Container } from "react-bootstrap";
 import "./Register.css";
+import { useNavigate } from "react-router-dom";
+// import Navigation from "../Navigation/Navigation";
+
 function Register() {
+  const navigate = useNavigate();
   return (
     <Container className=" text-center d-flex justify-content-center align-items-center vh-100 ">
       <Card className="w-auto">
@@ -12,32 +16,23 @@ function Register() {
             <p className="mb-0">Choose your user type to get started:</p>
           </div>
           <div className="d-flex flex-column">
-            <Button className="custom-button mb-2">
+            <Button
+              onClick={() => navigate("companySignup")}
+              className="custom-button mb-2"
+            >
               Register as a Company
             </Button>
-            <Button className="custom-button mt-2">Register as a Client</Button>
+
+            <Button
+              onClick={() => navigate("clientSignup")}
+              className="custom-button mt-2"
+            >
+              Register as a Client
+            </Button>
           </div>
         </Card.Body>
       </Card>
     </Container>
-
-    // <Card className="text-center">
-    //   <Card.Header>Featured</Card.Header>
-    //   <Card.Body>
-    //     <Card.Title>Special title treatment</Card.Title>
-    //     <Card.Text>
-    //       With supporting text below as a natural lead-in to additional content.
-    //     </Card.Text>
-    //     <div className="d-flex flex-column">
-    //       <Button className="custom-button mb-2" variant="dark">
-    //         Register as a Company
-    //       </Button>
-    //       <Button className="custom-button mb-2" variant="dark">
-    //         Register as a Client
-    //       </Button>
-    //     </div>
-    //   </Card.Body>
-    // </Card>
   );
 }
 

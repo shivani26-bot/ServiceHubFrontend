@@ -31,7 +31,10 @@ function Login() {
 
           <p>
             Or{" "}
-            <a href="#" className="register-link font-weight-bold fs-6 mb-0">
+            <a
+              href="/register"
+              className="register-link font-weight-bold fs-6 mb-0"
+            >
               register now!
             </a>
           </p>
