@@ -5,6 +5,15 @@ import Form from "react-bootstrap/Form";
 import "./ClientSignup.css";
 function ClientSignup() {
   // const [validated, setValidated] = useState(false);
+  // const handleSubmit = (event) => {
+  //   const form = event.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   }
+
+  //   setValidated(true);
+  // };
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -47,16 +56,6 @@ function ClientSignup() {
     setEmail(value);
     setIsValidEmail(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value));
   };
-
-  // const handleSubmit = (event) => {
-  //   const form = event.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
-
-  //   setValidated(true);
-  // };
 
   return (
     <div className="centered-container">
@@ -102,47 +101,20 @@ function ClientSignup() {
               )}
             </Form.Group>
 
-            {/* <Form.Group as={Col} controlId="validationCustomPassword">
-              <Form.Control
-                required
-                type="password"
-                className="mb-3 outline"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
-              {isPasswordMatch && password !== "" && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-            </Form.Group>
-
-            <Form.Group as={Col} controlId="validationCustomConfirmPassword">
-              <Form.Control
-                required
-                type="password"
-                className="mb-3 outline"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-                isInvalid={!isPasswordMatch && confirmPassword !== ""}
-              />
-              {isPasswordMatch && confirmPassword !== "" && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
-            </Form.Group> */}
+            
 
             <Form.Group as={Col} controlId="validationCustomPassword">
               <Form.Control
                 required
                 type="password"
-                className={`mb-3 outline ${
+                className={` mb-3 outline ${
                   password && password.length > 0 ? "is-valid" : ""
                 }`}
                 placeholder="Password"
                 value={password}
                 onChange={handlePasswordChange}
               />
+
               <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
             </Form.Group>
@@ -154,7 +126,11 @@ function ClientSignup() {
                 className={`mb-3 outline ${
                   confirmPassword &&
                   confirmPassword.length > 0 &&
-                  isPasswordMatch
+                  !isPasswordMatch
+                    ? "is-invalid"
+                    : confirmPassword &&
+                      confirmPassword.length > 0 &&
+                      isPasswordMatch
                     ? "is-valid"
                     : ""
                 }`}
@@ -162,8 +138,10 @@ function ClientSignup() {
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
-              <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+
+              {!isPasswordMatch && confirmPassword && (
+                <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
+              )}
             </Form.Group>
 
             {/* <Form.Group as={Col} controlId="validationCustom03">
