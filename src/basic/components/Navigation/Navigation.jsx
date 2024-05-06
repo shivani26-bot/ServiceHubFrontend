@@ -21,7 +21,7 @@ function Navigation() {
 
     <Navbar expand="lg" className="sticky bg-red">
       <Container>
-        <Navbar.Brand className="brand">Service Hub</Navbar.Brand>
+        <Navbar.Brand className="brand">ServiceHub</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">

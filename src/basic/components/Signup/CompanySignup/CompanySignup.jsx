@@ -3,18 +3,10 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import "./CompanySignup.css";
+import { createPost } from "../../../LocalApi";
+import { useNavigate } from "react-router-dom";
 function CompanySignup() {
-  // const [validated, setValidated] = useState(false);
-
-  // const handleSubmit = (event) => {
-  //   const form = event.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
-
-  //   setValidated(true);
-  // };
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -67,6 +59,11 @@ function CompanySignup() {
     setAddress(value);
     setIsValidAddress(value.trim() !== ""); // Validate if name is not empty
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   createPost();
+  // };
 
   return (
     <div className="centered-container">
@@ -181,7 +178,12 @@ function CompanySignup() {
               )}
             </Form.Group>
 
-            <Button className="custom-button mb-2">Register</Button>
+            <Button
+              className="custom-button mb-2"
+              onClick={() => navigate("otp")}
+            >
+              Register
+            </Button>
           </Form>
           <p>
             Or{" "}

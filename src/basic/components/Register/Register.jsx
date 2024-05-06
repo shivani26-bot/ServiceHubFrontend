@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 function Register() {
   const navigate = useNavigate();
   return (
-    <Container className=" text-center d-flex justify-content-center align-items-center vh-100 ">
+    <Container
+      style={{ marginTop: "200px" }}
+      className=" text-center d-flex justify-content-center align-items-center"
+    >
       <Card className="w-auto">
         <Card.Body className="card">
           <div className="mb-4">

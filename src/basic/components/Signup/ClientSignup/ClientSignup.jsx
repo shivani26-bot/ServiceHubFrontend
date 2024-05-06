@@ -3,17 +3,9 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import "./ClientSignup.css";
+import { useNavigate } from "react-router-dom";
 function ClientSignup() {
-  // const [validated, setValidated] = useState(false);
-  // const handleSubmit = (event) => {
-  //   const form = event.currentTarget;
-  //   if (form.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
-
-  //   setValidated(true);
-  // };
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -101,8 +93,6 @@ function ClientSignup() {
               )}
             </Form.Group>
 
-            
-
             <Form.Group as={Col} controlId="validationCustomPassword">
               <Form.Control
                 required
@@ -169,7 +159,11 @@ function ClientSignup() {
               )}
             </Form.Group>
 
-            <Button type="submit" className="custom-button mb-2">
+            <Button
+              onClick={() => navigate("otp")}
+              type="submit"
+              className="custom-button mb-2"
+            >
               Register
             </Button>
           </Form>
