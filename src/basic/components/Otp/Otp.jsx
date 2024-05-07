@@ -1,23 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Card } from "react-bootstrap";
 function Otp() {
-  const initialCountdown = 180;
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(5);
+  // const [countdown, setCountdown] = useState(10); // 3 minutes in seconds
+  // const [resendClicked, setResendClicked] = useState(false);
 
-  const [countdown, setCountdown] = useState(180); // 3 minutes in seconds
+  const resendOTP = () => {
+    setMinutes(0);
+    setSeconds(5);
+  };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (countdown === 0) {
-        setCountdown(initialCountdown); // Reset countdown to initial value
-      } else {
-        setCountdown(countdown - 1); // Decrease countdown by 1 every second
-      }
-    }, 1000);
+  useEffect(
+    () => {
+      const interval = setInterval(() => {
+        // decrease seconds if greater than 0
+        if (seconds > 0) setSeconds(seconds - 1);
+        // when seconds reach 0, decrease minutes if greater than 0
+        if (seconds === 0) {
+          if (minutes === 0) {
+            // stop the countdown when both minutes and seconds are 0
+            clearInterval(interval);
+          } else {
+            // reset seconds to 59 and decrease minutes by 1
+            setSeconds(59);
+            setMinutes(minutes - 1);
+          }
+        }
+      }, 1000);
 
-    // Clear interval on component unmount to prevent memory leaks
-    return () => clearInterval(timer);
-  }, [countdown, initialCountdown]);
+      // rerun this effect whenever second changes
+      return () => clearInterval(interval);
+    },
+    [seconds],
+    [minutes]
+  );
 
   const handleOTPChange = (index, value) => {
     const newOTP = [...otp];
@@ -30,12 +48,6 @@ function Otp() {
     // Add logic to handle OTP submission
   };
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-  };
-
   return (
     <Container
       style={{ marginTop: "200px" }}
@@ -44,7 +56,7 @@ function Otp() {
       <Col>
         {" "}
         {/* Increase the width of the card */}
-        <Card style={{ width: "400px", height: "300px", margin: "auto" }}>
+        <Card style={{ width: "400px", height: "310px", margin: "auto" }}>
           <Card.Body>
             <Card.Title className="text-center mb-4">
               <h2>
@@ -100,7 +112,23 @@ function Otp() {
                   fontWeight: "bold",
                 }}
               >
-                Didn't get the code? Resend {formatTime(countdown)}
+                Time Remaining:
+                <span>
+                  {" "}
+                  {minutes < 10 ? `0${minutes}` : minutes}:{" "}
+                  {seconds < 10 ? `0${seconds}` : seconds}
+                </span>
+                <button
+                  href="#"
+                  disabled={seconds > 0 || minutes > 0}
+                  style={{
+                    color: seconds > 0 || minutes > 0 ? "#FFFFFF" : "#FF5630",
+                    background: "black",
+                  }}
+                  onClick={resendOTP}
+                >
+                  Resend OTP
+                </button>
               </p>
             </div>
           </Card.Body>
