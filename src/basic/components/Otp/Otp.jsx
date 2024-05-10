@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Card } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 function Otp() {
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(5);
-  // const [countdown, setCountdown] = useState(10); // 3 minutes in seconds
-  // const [resendClicked, setResendClicked] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Navigate to the login page
+    navigate("/login");
+  };
+
+  const notify = () =>
+    toast.success("OTP sent successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   const resendOTP = () => {
     setMinutes(0);
@@ -46,6 +67,7 @@ function Otp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add logic to handle OTP submission
+    console.log(e);
   };
 
   return (
@@ -88,6 +110,7 @@ function Otp() {
               </div>
               <div className="text-center ">
                 <Button
+                  // disabled={!otp}
                   style={{
                     backgroundColor: "#000000",
                     transition: "background-color 0.3s",
@@ -100,6 +123,8 @@ function Otp() {
                   }
                   variant="dark"
                   type="submit"
+                  onClick={handleClick}
+                  // onClick={handleSubmit}
                 >
                   Submit
                 </Button>
@@ -113,7 +138,11 @@ function Otp() {
                 }}
               >
                 Time Remaining:
-                <span>
+                <span
+                  style={{
+                    marginRight: "80px",
+                  }}
+                >
                   {" "}
                   {minutes < 10 ? `0${minutes}` : minutes}:{" "}
                   {seconds < 10 ? `0${seconds}` : seconds}
@@ -122,11 +151,30 @@ function Otp() {
                   href="#"
                   disabled={seconds > 0 || minutes > 0}
                   style={{
-                    color: seconds > 0 || minutes > 0 ? "#FFFFFF" : "#FF5630",
+                    color: seconds > 0 || minutes > 0 ? "#FFFFFF" : "red",
                     background: "black",
                   }}
-                  onClick={resendOTP}
+                  onClick={() => {
+                    if (resendOTP) {
+                      resendOTP();
+                    }
+                    if (notify) {
+                      notify();
+                    }
+                  }}
                 >
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={1000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                  />
                   Resend OTP
                 </button>
               </p>

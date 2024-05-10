@@ -4,7 +4,10 @@ import Button from "react-bootstrap/Button";
 import "./Login.css";
 function Login() {
   return (
-    <div className="centered-container">
+    <div
+      style={{ marginTop: "150px" }}
+      className=" d-flex justify-content-center align-items-center "
+    >
       <div className="form-container">
         <>
           <div className="login-title">

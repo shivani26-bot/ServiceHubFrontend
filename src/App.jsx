@@ -7,6 +7,7 @@ import CompanySignup from "./basic/components/Signup/CompanySignup/CompanySignup
 import ClientSignup from "./basic/components/Signup/ClientSignup/ClientSignup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Otp from "./basic/components/Otp/Otp";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div>
@@ -22,7 +23,7 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<h1>404 Page Not Found!</h1>} />
+          {/* <Route path="/*" element={<h1>404 Page Not Found!</h1>} /> */}
         </Routes>
       </BrowserRouter>
     </div>

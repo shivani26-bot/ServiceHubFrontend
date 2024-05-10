@@ -5,6 +5,8 @@ const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 // POST request
-export const createPost = (postData) => {
-  return axiosInstance.post("/service-provider/sign-up", postData);
-};
+// export const createPost = (postData) => {
+//   return axiosInstance.post("/service-provider/sign-up", postData);
+// };
+
+export default axiosInstance;
