@@ -3,16 +3,31 @@ import { Container, Col, Form, Button, Card } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 
 function Otp() {
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(5);
 
+  const email = useSelector((state) => state.display.email);
+
+  console.log("Printing...", email);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     // Navigate to the login page
+
+    // axios.post(`http://localhost:9000/verify-account?email=${email}&otp=${otp}`)
+    // .then(() => {
+    //   axios.post(`http://localhost:9000/customer/sign-up` , body)
+    //   .then(() => {
+    //  TODO Toastify
+    //   })
+    // })
+
     navigate("/login");
   };
 
@@ -29,8 +44,10 @@ function Otp() {
     });
 
   const resendOTP = () => {
+    
     setMinutes(0);
     setSeconds(5);
+
   };
 
   useEffect(

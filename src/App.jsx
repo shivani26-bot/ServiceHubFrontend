@@ -1,12 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navigation from "./basic/components/Navigation/Navigation";
-import Register from "./basic/components/Register/Register";
-import Login from "./basic/components/Login/Login";
-import CompanySignup from "./basic/components/Signup/CompanySignup/CompanySignup";
-import ClientSignup from "./basic/components/Signup/ClientSignup/ClientSignup";
+import Navigation from "./components/Navigation/Navigation";
+import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+import CompanySignup from "./components/Signup/CompanySignup/CompanySignup";
+import ClientSignup from "./components/Signup/ClientSignup/ClientSignup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Otp from "./basic/components/Otp/Otp";
+import Otp from "./components/Otp/Otp";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (

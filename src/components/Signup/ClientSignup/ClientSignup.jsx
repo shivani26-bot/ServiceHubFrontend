@@ -195,6 +195,8 @@ import Form from "react-bootstrap/Form";
 import "./ClientSignup.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
+
 function ClientSignup() {
   const navigate = useNavigate();
 
@@ -232,6 +234,9 @@ function ClientSignup() {
   ]);
   const handleSubmit = () => {
     console.log(data);
+
+    axios.put(`http://localhost:9000/regenerate-otp?email=${data.email}`);
+
     navigate("otp");
   };
 

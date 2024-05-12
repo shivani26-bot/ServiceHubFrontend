@@ -4,11 +4,13 @@ import Form from "react-bootstrap/Form";
 import { useEffect } from "react";
 import "./CompanySignup.css";
 import { useNavigate } from "react-router-dom";
+import { companyRegister } from "../../../feature/displaySlice";
+import { useSelector, useDispatch } from "react-redux";
 // import { createPost } from "../../../LocalApi";
 // import { useNavigate } from "react-router-dom";
 function CompanySignup() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -46,7 +48,32 @@ function CompanySignup() {
     isPasswordMatch,
   ]);
   const handleSubmit = () => {
-    console.log(data);
+    // console.log(data);
+    event.preventDefault();
+
+    // const url='http://localhost:9000/service-provider/sign-up';
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type':'application/json'
+    //   },
+    //   body: JSON.stringify({data.name, data.email});
+    //   fetch(url, requestOptions).then(response=>console.log('Submitted Successfully'))
+    //   .catch(error=>console.log('Form submit error',error))
+    // };
+    dispatch(
+      companyRegister({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        address: data.address,
+        telephone: data.telephone,
+      })
+    );
+
+    
+  
     navigate("otp");
   };
 
@@ -56,6 +83,7 @@ function CompanySignup() {
     const { name, value } = event.target;
 
     setData({ ...data, [name]: value });
+
     if (name === "name") {
       const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
       setIsValidName(isValid);
