@@ -6,6 +6,7 @@ import "./CompanySignup.css";
 import { useNavigate } from "react-router-dom";
 import { companyRegister } from "../../../feature/displaySlice";
 import { useSelector, useDispatch } from "react-redux";
+import { postCompanyData } from "../../../feature/apiSlice";
 // import { createPost } from "../../../LocalApi";
 // import { useNavigate } from "react-router-dom";
 function CompanySignup() {
@@ -71,9 +72,7 @@ function CompanySignup() {
         telephone: data.telephone,
       })
     );
-
-    
-  
+    dispatch(postCompanyData(data));
     navigate("otp");
   };
 

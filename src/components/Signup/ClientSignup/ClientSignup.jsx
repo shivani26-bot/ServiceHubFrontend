@@ -190,15 +190,17 @@
 
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import "./ClientSignup.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-
+import { useSelector, useDispatch } from "react-redux";
+import { customerRegister } from "../../../feature/displaySlice";
+import { postCustomerData } from "../../../feature/apiSlice";
 function ClientSignup() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
@@ -235,8 +237,17 @@ function ClientSignup() {
   const handleSubmit = () => {
     console.log(data);
 
-    axios.put(`http://localhost:9000/regenerate-otp?email=${data.email}`);
-
+    // axios.put(`http://localhost:9000/regenerate-otp?email=${data.email}`);
+    dispatch(
+      customerRegister({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        telephone: data.telephone,
+      })
+    );
+    dispatch(postCustomerData(data));
     navigate("otp");
   };
 

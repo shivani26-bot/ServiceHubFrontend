@@ -11,10 +11,16 @@
 .bg-red {
   background-color: #121481; /* Set background color of the navbar to red */
 }
-.navbar-nav .nav-link:hover {
-  background-color: #000; /* Set background color on hover */
-}
+
 .navbar-nav .nav-link {
-  color: #fff; /* Set text color for the nav links */
+  color: #fff;
   font-size: 18px;
+}
+.navbar-nav .nav-link:hover {
+  color: white;
+  background-color: black;
+}
+.navbar-nav .nav-link.active {
+  color: white;
+  background-color: red;
 }

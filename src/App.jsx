@@ -8,12 +8,15 @@ import ClientSignup from "./components/Signup/ClientSignup/ClientSignup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Otp from "./components/Otp/Otp";
 import "react-toastify/dist/ReactToastify.css";
+import Home from "./components/Home/Home";
+
 function App() {
   return (
     <div>
-      <Navigation />
       <BrowserRouter>
+        <Navigation />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/register/*" element={null}>
             <Route path="" element={<Register />}></Route>
             <Route path="companySignup" element={<CompanySignup />} />

@@ -11,26 +11,23 @@ function Otp() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(5);
 
-  const email = useSelector((state) => state.display.email);
-
-  console.log("Printing...", email);
+  const companyEmail = useSelector((state) => state.display.company.email);
+  const customerEmail = useSelector((state) => state.display.customer.email);
+  console.log("Printing...", companyEmail);
+  console.log("Printing...", customerEmail);
 
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    // Navigate to the login page
-
-    // axios.post(`http://localhost:9000/verify-account?email=${email}&otp=${otp}`)
-    // .then(() => {
-    //   axios.post(`http://localhost:9000/customer/sign-up` , body)
-    //   .then(() => {
-    //  TODO Toastify
-    //   })
-    // })
-
-    navigate("/login");
-  };
-
+  const notifyRegister = () =>
+    toast.success("Registered Successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   const notify = () =>
     toast.success("OTP sent successfully!", {
       position: "top-right",
@@ -43,11 +40,26 @@ function Otp() {
       theme: "colored",
     });
 
+  const handleClick = () => {
+    // Navigate to the login page
+    // axios.post(`http://localhost:9000/verify-account?email=${email}&otp=${otp}`)
+    // .then(() => {
+    //   axios.post(`http://localhost:9000/customer/sign-up` , body)
+    //   .then(() => {
+    //  TODO Toastify
+    //   })
+    // })
+
+    notifyRegister();
+    // toast.success("Registered Successfully!");
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  };
+
   const resendOTP = () => {
-    
     setMinutes(0);
     setSeconds(5);
-
   };
 
   useEffect(
@@ -93,7 +105,6 @@ function Otp() {
       className=" text-center d-flex justify-content-center align-items-center "
     >
       <Col>
-        {" "}
         {/* Increase the width of the card */}
         <Card style={{ width: "400px", height: "310px", margin: "auto" }}>
           <Card.Body>
@@ -105,6 +116,7 @@ function Otp() {
             <Card.Subtitle className="text-center mb-4">
               <p>Enter 6 digit OTP sent to the registered email id</p>
             </Card.Subtitle>
+
             <Form onSubmit={handleSubmit}>
               <div className="d-flex justify-content-center mb-4 ">
                 {otp.map((digit, index) => (
@@ -180,20 +192,20 @@ function Otp() {
                     }
                   }}
                 >
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={1000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                  />
                   Resend OTP
                 </button>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={1000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick={false}
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                />
               </p>
             </div>
           </Card.Body>
