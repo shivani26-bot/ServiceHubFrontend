@@ -38,53 +38,51 @@ function Login() {
       className=" d-flex justify-content-center align-items-center "
     >
       <div className="form-container">
-        <>
-          <div className="login-title">
-            <h2 className="font-weight-bold">Login</h2>
-          </div>
+        <div className="login-title">
+          <h2 className="font-weight-bold">Login</h2>
+        </div>
 
-          <div className="mb-3 outline">
-            <FloatingLabel controlId="floatingInput" label="Email address">
-              <Form.Control
-                name="email"
-                value={data.email}
-                type="email"
-                placeholder="name@example.com"
-                onChange={handleChange}
-              />
-            </FloatingLabel>
-          </div>
-          <div className="mb-3 outline">
-            <FloatingLabel controlId="floatingPassword" label="Password">
-              <Form.Control
-                name="password"
-                value={data.password}
-                type="password"
-                placeholder="Password"
-                onChange={handleChange}
-              />
-            </FloatingLabel>
-          </div>
-          <Form.Check
-            type={"checkbox"}
-            id={`default-${"checkbox"}`}
-            label={`Remember me`}
-            className="mb-3"
-          />
-          <Button className="custom-button mb-2" onClick={handleSubmit}>
-            Login
-          </Button>
+        <div className="mb-3 outline">
+          <FloatingLabel controlId="floatingInput" label="Email address">
+            <Form.Control
+              name="email"
+              value={data.email}
+              type="email"
+              placeholder="name@example.com"
+              onChange={handleChange}
+            />
+          </FloatingLabel>
+        </div>
+        <div className="mb-3 outline">
+          <FloatingLabel controlId="floatingPassword" label="Password">
+            <Form.Control
+              name="password"
+              value={data.password}
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+          </FloatingLabel>
+        </div>
+        <Form.Check
+          type={"checkbox"}
+          id={`default-${"checkbox"}`}
+          label={`Remember me`}
+          className="mb-3"
+        />
+        <Button className="custom-button mb-2" onClick={handleSubmit}>
+          Login
+        </Button>
 
-          <p>
-            Or{" "}
-            <a
-              href="/register"
-              className="register-link font-weight-bold fs-6 mb-0"
-            >
-              register now!
-            </a>
-          </p>
-        </>
+        <p>
+          Or{" "}
+          <a
+            href="/register"
+            className="register-link font-weight-bold fs-6 mb-0"
+          >
+            register now!
+          </a>
+        </p>
       </div>
     </div>
   );

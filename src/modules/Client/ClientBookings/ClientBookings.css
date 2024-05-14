@@ -1,0 +1,28 @@
+.table-container {
+  margin: 10px auto; /* Margin from top and horizontally centered */
+  max-width: 100%; /* Optional: Adjust the maximum width of the container */
+  margin-top: 50px; /* Margin from the top */
+  margin-right: 50px; /* Margin from the right */
+  margin-left: 50px; /* Margin from the left */
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid black;
+  text-align: center;
+  padding: 15px;
+  color: #121481;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+table tr td button {
+  cursor: pointer;
+}
