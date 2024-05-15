@@ -25,7 +25,7 @@ export const displaySlice = createSlice({
   },
   reducers: {
     companyRegister: (state, action) => {
-      console.log("inside", action.payload);
+      // console.log("inside", action.payload);
       state.company.name = action.payload.name;
       state.company.email = action.payload.email;
       state.company.password = action.payload.password;
@@ -34,7 +34,7 @@ export const displaySlice = createSlice({
       state.company.telephone = action.payload.telephone;
     },
     customerRegister: (state, action) => {
-      console.log("inside", action.payload);
+      // console.log("inside", action.payload);
       state.customer.name = action.payload.name;
       state.customer.email = action.payload.email;
       state.customer.password = action.payload.password;
@@ -42,7 +42,7 @@ export const displaySlice = createSlice({
       state.customer.telephone = action.payload.telephone;
     },
     login: (state, action) => {
-      console.log("inside", action.payload);
+      // console.log("inside", action.payload);
       state.login.email = action.payload.email;
       state.login.password = action.payload.password;
     },

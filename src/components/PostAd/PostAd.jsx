@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import { useRef } from "react";
 import "./PostAd.css";
+import { useDispatch } from "react-redux";
+import { postService } from "../../feature/apiSlice";
+
 export default function PostAd() {
   const [isValidPrice, setIsValidPrice] = useState(false);
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidDescription, setIsValidDescription] = useState(false);
-
+  const dispatch = useDispatch();
   const [image, setImage] = useState("");
   const inputRef = useRef(null);
   const [data, setData] = useState({
@@ -53,6 +56,7 @@ export default function PostAd() {
   const handleSubmit = () => {
     console.log(data);
     event.preventDefault();
+    dispatch(postService(data));
 
     // navigate("otp");
   };

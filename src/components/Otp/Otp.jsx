@@ -5,11 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-
+import { regenerateOTP, verifyOTP } from "../../feature/apiSlice";
 function Otp() {
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(59);
+  const dispatch = useDispatch();
 
   const companyEmail = useSelector((state) => state.display.company.email);
   const customerEmail = useSelector((state) => state.display.customer.email);
@@ -59,7 +60,9 @@ function Otp() {
 
   const resendOTP = () => {
     setMinutes(0);
-    setSeconds(5);
+    setSeconds(59);
+    if (companyEmail) dispatch(regenerateOTP(companyEmail));
+    if (customerEmail) dispatch(regenerateOTP(customerEmail));
   };
 
   useEffect(
@@ -96,6 +99,13 @@ function Otp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add logic to handle OTP submission
+    const otpString = otp.join("");
+    console.log(otpString);
+
+    if (companyEmail)
+      dispatch(verifyOTP({ email: companyEmail, otp: otpString }));
+    if (customerEmail)
+      dispatch(verifyOTP({ email: companyEmail, otp: otpString }));
     console.log(e);
   };
 
@@ -180,8 +190,9 @@ function Otp() {
                   href="#"
                   disabled={seconds > 0 || minutes > 0}
                   style={{
-                    color: seconds > 0 || minutes > 0 ? "#FFFFFF" : "red",
-                    background: "black",
+                    color: seconds > 0 || minutes > 0 ? "black" : "white",
+                    backgroundColor:
+                      seconds > 0 || minutes > 0 ? "#CCCCCC" : "black",
                   }}
                   onClick={() => {
                     if (resendOTP) {
@@ -192,7 +203,7 @@ function Otp() {
                     }
                   }}
                 >
-                  Resend OTP
+                  Regenerate OTP
                 </button>
                 <ToastContainer
                   position="top-right"

@@ -10,13 +10,13 @@ function Register() {
       style={{ marginTop: "200px" }}
       className=" text-center d-flex justify-content-center align-items-center"
     >
-      <Card className="w-auto">
-        <Card.Body className="card">
+      <Card style={{ height: "auto", width: "410px" }}>
+        <Card.Body>
           <div className="mb-4">
-            <p className="font-weight-bold fs-5 mb-2">
+            <h2 className="font-weight-bold  mb-4">
               Welcome To The Service Booking System!
-            </p>
-            <p className="mb-0">Choose your user type to get started:</p>
+            </h2>
+            <p>Choose your user type to get started:</p>
           </div>
           <div className="d-flex flex-column">
             <Button

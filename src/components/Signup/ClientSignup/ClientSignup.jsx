@@ -248,6 +248,7 @@ function ClientSignup() {
       })
     );
     dispatch(postCustomerData(data));
+
     navigate("otp");
   };
 

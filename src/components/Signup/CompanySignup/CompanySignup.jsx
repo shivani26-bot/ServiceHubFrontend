@@ -9,9 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { postCompanyData } from "../../../feature/apiSlice";
 // import { createPost } from "../../../LocalApi";
 // import { useNavigate } from "react-router-dom";
+import { regenerateOTP } from "../../../feature/apiSlice";
+
+import { useCookies } from "react-cookie";
 function CompanySignup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // const [cookies, setCookie] = useCookies(["name"]);
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -72,7 +76,10 @@ function CompanySignup() {
         telephone: data.telephone,
       })
     );
+    // setCookie("test", data.name);
     dispatch(postCompanyData(data));
+    // dispatch(regenerateOTP(data.email));
+
     navigate("otp");
   };
 

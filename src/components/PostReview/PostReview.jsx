@@ -1,10 +1,30 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
+import { useState } from "react";
+import { yellow } from "@mui/material/colors";
+
 export default function PostReview() {
+  // const [value, setValue] = React.useState(null);
+  const [data, setData] = useState({ comment: "", rating: null });
+  const handleChange = (event) => {
+    event.preventDefault();
+
+    const { name, value } = event.target;
+
+    setData({ ...data, [name]: value });
+  };
+
+  const handleSubmit = () => {
+    console.log(data);
+  };
+
   return (
     <div
-      style={{ marginTop: "200px", marginBottom: "100px" }}
+      style={{ marginTop: "160px", marginBottom: "100px" }}
       className="d-flex justify-content-center align-items-center "
     >
       <div
@@ -20,10 +40,30 @@ export default function PostReview() {
           Post Review
         </h2>
         <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows={3} />
+          <Form.Group className="mb-3" controlId="PostComment">
+            <Form.Label> Comment:</Form.Label>
+            <Form.Control
+              name="comment"
+              value={data.comment}
+              as="textarea"
+              rows={3}
+              onChange={handleChange}
+            />
           </Form.Group>
-
+          <Box
+            sx={{
+              "& > legend": { mt: 2 },
+            }}
+          >
+            <Typography component="legend">
+              Your feedback fuels our journey. Share your experience and help us
+              craft better moments together.{" "}
+              <span style={{ fontWeight: "bold", color: "#FFA500" }}>
+                Rate now!
+              </span>
+            </Typography>
+            <Rating name="rating" value={data.rating} onChange={handleChange} />
+          </Box>
           <Button
             style={{
               width: "100%",
@@ -36,7 +76,7 @@ export default function PostReview() {
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#000000")}
             // //   disabled={!validated}
             className="d-flex justify-content-center align-items-center"
-            //   onClick={handleSubmit}
+            onClick={handleSubmit}
           >
             Post
           </Button>

@@ -6,8 +6,11 @@ import { login } from "../../feature/displaySlice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postLoginData } from "../../feature/apiSlice";
+import { useCookies } from "react-cookie";
+
 function Login() {
   const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies(["userCookie"]);
 
   const [data, setData] = useState({
     email: "",
@@ -31,6 +34,7 @@ function Login() {
       })
     );
     dispatch(postLoginData(data));
+    setCookie("userCookie", data.email);
   };
   return (
     <div
