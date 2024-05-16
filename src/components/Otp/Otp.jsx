@@ -6,20 +6,34 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { regenerateOTP, verifyOTP } from "../../feature/apiSlice";
+import { useRef } from "react";
 function Otp() {
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(59);
   const dispatch = useDispatch();
+  const inputRefs = useRef([]);
 
   const companyEmail = useSelector((state) => state.display.company.email);
   const customerEmail = useSelector((state) => state.display.customer.email);
-  console.log("Printing...", companyEmail);
-  console.log("Printing...", customerEmail);
-
+  // const verificationResponse = useSelector((state) => state.api.data);
+  // console.log("Printing...", companyEmail);
+  // console.log("Printing...", customerEmail);
+  // console.log("response...", verificationResponse);
   const navigate = useNavigate();
   const notifyRegister = () =>
     toast.success("Registered Successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const notifyFailure = (message) =>
+    toast.error(message, {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
@@ -40,23 +54,6 @@ function Otp() {
       progress: undefined,
       theme: "colored",
     });
-
-  const handleClick = () => {
-    // Navigate to the login page
-    // axios.post(`http://localhost:9000/verify-account?email=${email}&otp=${otp}`)
-    // .then(() => {
-    //   axios.post(`http://localhost:9000/customer/sign-up` , body)
-    //   .then(() => {
-    //  TODO Toastify
-    //   })
-    // })
-
-    notifyRegister();
-    // toast.success("Registered Successfully!");
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
-  };
 
   const resendOTP = () => {
     setMinutes(0);
@@ -94,19 +91,38 @@ function Otp() {
     const newOTP = [...otp];
     newOTP[index] = value;
     setOTP(newOTP);
+    if (value !== "" && index < otp.length - 1) {
+      inputRefs.current[index + 1].focus();
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add logic to handle OTP submission
+
     const otpString = otp.join("");
     console.log(otpString);
+    let email;
+    if (companyEmail) email = companyEmail;
+    if (customerEmail) email = customerEmail;
 
-    if (companyEmail)
-      dispatch(verifyOTP({ email: companyEmail, otp: otpString }));
-    if (customerEmail)
-      dispatch(verifyOTP({ email: companyEmail, otp: otpString }));
-    console.log(e);
+    dispatch(verifyOTP({ email, otp: otpString }))
+      .then((response) => {
+        if (
+          response.payload ===
+          "Congratulations! Your OTP has been successfully verified. You can now proceed to login to ServiceHub and explore our services."
+        ) {
+          notifyRegister();
+          setTimeout(() => {
+            navigate("/login");
+          }, 4000);
+        } else {
+          notifyFailure(response.payload);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error notification if needed
+      });
   };
 
   return (
@@ -144,6 +160,7 @@ function Otp() {
                       //   marginLeft: index === 0 ? "1px" : "0", // Add margin-left to the first box
                       textAlign: "center",
                     }}
+                    ref={(input) => (inputRefs.current[index] = input)}
                   />
                 ))}
               </div>
@@ -162,7 +179,6 @@ function Otp() {
                   }
                   variant="dark"
                   type="submit"
-                  onClick={handleClick}
                   // onClick={handleSubmit}
                 >
                   Submit
@@ -203,7 +219,7 @@ function Otp() {
                     }
                   }}
                 >
-                  Regenerate OTP
+                  Resend OTP
                 </button>
                 <ToastContainer
                   position="top-right"

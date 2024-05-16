@@ -41,17 +41,36 @@ export const postLoginData = createAsyncThunk(
       },
       body: JSON.stringify(loginData),
     });
-    return response.json();
+
+    // when incorrect username and password
+    // const text = await response.text();
+    // console.log("Response from backend:", text); // Log the response payload
+
+    // return text;
+
+    // when correct username and password entered
+    // const data = await response.json();
+    // console.log("Response from backend:", data); // Log the response payload
+    // return data;
+
+    // const contentType = response.headers.get("content-type");
+    // console.log(contentType);
+    // if (contentType && contentType.includes("application/json")) {
+    //   // If the response is JSON, parse and return it
+    //   return response.json();
+    // } else {
+    //   // If the response is plain text, return it as is
+    //   return response.text();
+    // }
   }
 );
 
 export const verifyOTP = createAsyncThunk(
   "verifyOTP",
   async ({ email, otp }) => {
+    console.log(email, otp);
     const response = await fetch(
-      `http://localhost:9000/verify-account?email=${encodeURIComponent(
-        email
-      )}&otp=${encodeURIComponent(otp)}`,
+      `http://localhost:9000/verify-account?email=${email}&otp=${otp}`,
       {
         method: "POST",
         headers: {
@@ -60,7 +79,16 @@ export const verifyOTP = createAsyncThunk(
         body: JSON.stringify({ email, otp }),
       }
     );
-    return response.json();
+
+    // return response.json();
+    // const data = await response.json();
+    // const jsonString = JSON.stringify(data);
+    // console.log("Response from backend:", jsonString); // Log the response payload
+    // return jsonString;
+    const text = await response.text();
+    console.log("Response from backend:", text); // Log the response payload
+
+    return text;
   }
 );
 
@@ -68,13 +96,13 @@ export const regenerateOTP = createAsyncThunk(
   "regenerateOTP",
   async (email) => {
     const response = await fetch(
-      `http://localhost:9000/regenerate-otp?email=${encodeURIComponent(email)}`,
+      `http://localhost:9000/regenerate-otp?email=${email}`,
       {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(email),
+        // body: JSON.stringify(email),
       }
     ).catch((error) => console.error(error));
     return response.json();
@@ -128,14 +156,28 @@ const apiSlice = createSlice({
   },
   // to handle Pending, succesfull and fail case
   extraReducers: (builder) => {
-    builder.addCase(postCompanyData.pending, (state, action) => {
+    // builder.addCase(postLoginData.pending, (state, action) => {
+    //   state.isLoading = true;
+    // });
+    // builder.addCase(postLoginData.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   state.data = action.payload;
+    // });
+    // builder.addCase(postLoginData.rejected, (state, action) => {
+    //   console.log("Error", action.payload);
+    //   state.isError = true;
+    // });
+    builder.addCase(verifyOTP.pending, (state, action) => {
+      console.log("", action.payload);
       state.isLoading = true;
     });
-    builder.addCase(postCompanyData.fulfilled, (state, action) => {
+    builder.addCase(verifyOTP.fulfilled, (state, action) => {
+      console.log("fullfilled", action.payload);
       state.isLoading = false;
       state.data = action.payload;
+      state.isError = false;
     });
-    builder.addCase(postCompanyData.rejected, (state, action) => {
+    builder.addCase(verifyOTP.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });
