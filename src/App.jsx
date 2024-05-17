@@ -5,7 +5,7 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import CompanySignup from "./components/Signup/CompanySignup/CompanySignup";
 import ClientSignup from "./components/Signup/ClientSignup/ClientSignup";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Otp from "./components/Otp/Otp";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home/Home";
@@ -16,15 +16,18 @@ import CompanyNavigationBar from "./components/Navigation/CompanyNavigationBar";
 import CompanyDashBoard from "./modules/Company/CompanyDashBoard/CompanyDashBoard";
 import PostAd from "./components/PostAd/PostAd";
 import PostReview from "./components/PostReview/PostReview";
+
+import Services from "./components/Services/Services";
+
 function App() {
+  // Since useLocation needs to be used within a Router component, we can't use it directly in the App component. Instead, we need to utilize it within the components that are children of a Router
   return (
     <div>
       <BrowserRouter>
-        <Navigation />
+        {/* <ConditionalNavigation /> */}
 
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<PostReview />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register/*" element={null}>
             <Route path="" element={<Register />}></Route>
             <Route path="companySignup" element={<CompanySignup />} />
@@ -34,25 +37,14 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />} />
+
+          <Route path="/clientDashboard" element={<ClientDashBoard />} />
+          <Route path="/clientBookings" element={<ClientBookings />} />
+          <Route path="/companyDashboard" element={<CompanyDashBoard />} />
+          <Route path="/companyPostAd" element={<PostAd />} />
+          <Route path="/companyAds" element={<Services />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <BrowserRouter>
-        <ClientNavigationBar />
-        <Routes> */}
-      {/* <Route path="/clientDashboard" element={<ClientDashBoard />} /> */}
-
-      {/* <Route path="/clientBookings" element={<ClientBookings />} />
-        </Routes>
-      </BrowserRouter> */}
-
-      {/* <BrowserRouter>
-        <CompanyNavigationBar />
-        <Routes>
-          <Route path="/CompanyDashboard" element={<CompanyDashBoard />} />
-          <Route path="/companyPostAd" element={<PostAd />} />
-        </Routes>
-      </BrowserRouter> */}
     </div>
   );
 }
@@ -61,4 +53,14 @@ export default App;
 
 {
   /* <Route path="/*" element={<h1>404 Page Not Found!</h1>} /> */
+}
+
+{
+  /* <BrowserRouter>
+        <CompanyNavigationBar />
+        <Routes>
+          <Route path="/CompanyDashboard" element={<CompanyDashBoard />} />
+          <Route path="/companyPostAd" element={<PostAd />} />
+        </Routes>
+      </BrowserRouter> */
 }

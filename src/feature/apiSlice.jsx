@@ -31,39 +31,41 @@ export const postCustomerData = createAsyncThunk(
   }
 );
 
-export const postLoginData = createAsyncThunk(
-  "postLoginData",
-  async (loginData) => {
-    const response = await fetch("http://localhost:9000/authenticate/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    });
+// export const postLoginData = createAsyncThunk(
+//   "postLoginData",
+//   async (loginData) => {
+//     const response = await fetch("http://localhost:9000/authenticate/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-type": "application/json",
+//       },
+//       body: JSON.stringify(loginData),
+//     });
 
-    // when incorrect username and password
-    // const text = await response.text();
-    // console.log("Response from backend:", text); // Log the response payload
+//     console.log(response);
+//     return response.json();
+// when incorrect username and password
+// const text = await response.text();
+// console.log("Response from backend:", text); // Log the response payload
 
-    // return text;
+// return text;
 
-    // when correct username and password entered
-    // const data = await response.json();
-    // console.log("Response from backend:", data); // Log the response payload
-    // return data;
+// when correct username and password entered
+// const data = await response.json();
+// console.log("Response from backend:", data); // Log the response payload
+// return data;
 
-    // const contentType = response.headers.get("content-type");
-    // console.log(contentType);
-    // if (contentType && contentType.includes("application/json")) {
-    //   // If the response is JSON, parse and return it
-    //   return response.json();
-    // } else {
-    //   // If the response is plain text, return it as is
-    //   return response.text();
-    // }
-  }
-);
+// const contentType = response.headers.get("content-type");
+// console.log(contentType);
+// if (contentType && contentType.includes("application/json")) {
+//   // If the response is JSON, parse and return it
+//   return response.json();
+// } else {
+//   // If the response is plain text, return it as is
+//   return response.text();
+// }
+//   }
+// );
 
 export const verifyOTP = createAsyncThunk(
   "verifyOTP",
@@ -125,27 +127,6 @@ export const postService = createAsyncThunk(
     return response.json();
   }
 );
-
-// export const fetchCompanyData = createAsyncThunk(
-//   "fetchCompanyData",
-//   async () => {
-//     const response = await fetch("url");
-//     return response.json();
-//   }
-// );
-
-// export const fetchCustomerData = createAsyncThunk(
-//   "fetchCustomerData",
-//   async () => {
-//     const response = await fetch("url");
-//     return response.json();
-//   }
-// );
-
-// export const fetchLoginData = createAsyncThunk("fetchLoginData", async () => {
-//   const response = await fetch("url");
-//   return response.json();
-// });
 
 const apiSlice = createSlice({
   name: "api",
