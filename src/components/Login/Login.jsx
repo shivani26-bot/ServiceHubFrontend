@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { postLogin } from "../../feature/authSlice";
 import { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
-
+import { useStore } from "react-redux";
 function Login() {
   const [cookies, setCookie] = useCookies(["userCookie"]);
 
@@ -47,8 +47,8 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [cookies, setCookie] = useCookies(["userCookie"]);
-  const { loading, user, error } = useSelector((state) => state.auth);
+
+  const { authToken, userId, userData } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
     email: "",
@@ -60,7 +60,9 @@ function Login() {
     const { name, value } = event.target;
     setData({ ...data, [name]: value });
   };
-
+  // console.log("authToken1", authToken);
+  // console.log("user1", userId);
+  // console.log("data", userData);
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(postLogin({ username: data.email, password: data.password }))
@@ -76,21 +78,10 @@ function Login() {
   };
 
   useEffect(() => {
-    if (user) {
-      console.log(user);
-      // Split the user string by '}{'
-      const userParts = user.split("}{");
-
-      // Extract the first part, which contains the user information JSON object
-      const userJsonString = userParts[0] + "}";
-
-      // Parse the user object string into JSON
-      const userData = JSON.parse(userJsonString);
-
-      const authTokenString = "{" + userParts[1];
-      const authTokenData = JSON.parse(authTokenString); // Assuming token is returned in the response
-      const authToken = authTokenData["Authorization Token is"];
-      // console.log(authToken);
+    // console.log("authToken1", authToken);
+    // console.log("user1", userId);
+    // console.log("data", userData); //{role: 'SERVICEPROVIDER', userId: 3}
+    if (authToken && userId && userData) {
       const expirationDate = new Date();
       expirationDate.setHours(expirationDate.getHours() + 1);
       setCookie("userCookie", authToken, {
@@ -98,12 +89,6 @@ function Login() {
         expires: expirationDate,
       });
 
-      const userId = userData.userId;
-      // console.log(userId);
-      // Now you can access the role from the parsed user object
-      console.log(userData.role); // This should print "CUSTOMER"
-      // console.log(user.role);
-      // console.log(UserRole.CUSTOMER);
       if (userData.role === UserRole.CUSTOMER) {
         notifySuccess();
         setTimeout(() => {
@@ -114,14 +99,14 @@ function Login() {
         setTimeout(() => {
           navigate("/companyDashboard");
         }, 3000);
-        // Redirect to service provider dashboard if user is a service provider
       }
-      // else {
-      //   notifyFailure("Invalid Username or Password");
-      // }
     }
-  }, [user, navigate]);
-
+  }, [authToken, userId, userData, navigate]);
+  // console.log("authToken1", authToken);
+  // console.log("user1", userId);
+  // console.log("data", userData);
+  const store = useStore();
+  console.log("State:", store.getState());
   return (
     <>
       <Navigation />

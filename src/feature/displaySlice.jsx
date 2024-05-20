@@ -42,7 +42,7 @@ export const displaySlice = createSlice({
       state.customer.telephone = action.payload.telephone;
     },
     login: (state, action) => {
-      // console.log("inside", action.payload);
+      console.log("inside", action.payload);
       state.login.email = action.payload.email;
       state.login.password = action.payload.password;
     },

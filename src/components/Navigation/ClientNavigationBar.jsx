@@ -1,5 +1,6 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+
+import { Link, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,17 +11,20 @@ export default function ClientNavigationBar() {
     {
       name: "Dashboard",
       href: "/clientDashboard",
+      // to:"/clientDashboard",
       current: location.pathname === "/clientDashboard" ? true : false,
     },
     {
       name: "Bookings",
       href: "/clientBookings",
+      // to:"/clientBookings",
       current: location.pathname === "/clientBookings" ? true : false,
     },
 
     {
       name: "Logout",
       href: "/clientLogout",
+      // to:"/clientBookings",
       current: location.pathname === "/clientLogout" ? true : false,
     },
   ];
@@ -38,6 +42,7 @@ export default function ClientNavigationBar() {
                   href={item.href}
                   className={item.current ? "active" : ""}
                 >
+                  {/* <Nav.Link as={Link} to={item.to} className={item.current ? "active" : ""}> */}
                   {item.name}
                 </Nav.Link>
               </Nav.Item>

@@ -43,6 +43,8 @@ function App() {
           <Route path="/companyDashboard" element={<CompanyDashBoard />} />
           <Route path="/companyPostAd" element={<PostAd />} />
           <Route path="/companyAds" element={<Services />} />
+          <Route path="/clientLogout" element={<Login />} />
+          <Route path="/companyLogout" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

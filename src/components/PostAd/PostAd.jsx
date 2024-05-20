@@ -10,30 +10,30 @@ import { useDispatch } from "react-redux";
 import { postService } from "../../feature/apiSlice";
 import CompanyNavigationBar from "../Navigation/CompanyNavigationBar";
 import { useSelector } from "react-redux";
-
+import { useStore } from "react-redux";
 export default function PostAd() {
-  const [isValidPrice, setIsValidPrice] = useState(false);
-  const [validated, setValidated] = useState(false);
-  const [isValidName, setIsValidName] = useState(false);
-  const [isValidDescription, setIsValidDescription] = useState(false);
+  // const [cookies, setCookie] = useCookies(["userCookie"]);
   const dispatch = useDispatch();
-  const [image, setImage] = useState("");
-  const inputRef = useRef(null);
+  // console.log(loginEmail, loginPassword);
 
-  const authToken = useSelector((state) => state.auth.authToken);
-  const userId = useSelector((state) => state.auth.userId);
-
-  const status = useSelector((state) => state.auth);
-  console.log(status);
-
-  console.log("authtoken", authToken);
-  console.log("userid", userId);
   const [data, setData] = useState({
     name: "",
     price: "",
     description: "",
     img: "",
   });
+
+  const store = useStore();
+  console.log("State:", store.getState());
+  const authToken = useSelector((state) => state.auth.authToken);
+  const userId = useSelector((state) => state.auth.userId);
+  const [isValidPrice, setIsValidPrice] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidDescription, setIsValidDescription] = useState(false);
+
+  const [image, setImage] = useState("");
+  const inputRef = useRef(null);
 
   const handleImageClick = () => {
     inputRef.current.click();
@@ -57,30 +57,6 @@ export default function PostAd() {
     setData({ ...data, [name]: value });
   };
 
-  useEffect(() => {
-    if (isValidName && isValidPrice && isValidDescription) {
-      // console.log("check");
-      setValidated(true);
-    } else setValidated(false);
-  }, [isValidName, isValidPrice, isValidDescription]);
-
-  const handleSubmit = () => {
-    console.log(data);
-    event.preventDefault();
-    dispatch(
-      postService({
-        serviceName: data.name,
-        description: data.description,
-        price: data.price,
-        img: data.img,
-        id: userId,
-        authToken,
-      })
-    );
-
-    // navigate("otp");
-  };
-
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -102,6 +78,29 @@ export default function PostAd() {
       setIsValidDescription(isValid);
     }
   };
+
+  useEffect(() => {
+    if (isValidName && isValidPrice && isValidDescription) {
+      // console.log("check");
+      setValidated(true);
+    } else setValidated(false);
+  }, [isValidName, isValidPrice, isValidDescription]);
+
+  const handleSubmit = () => {
+    console.log(data);
+    console.log("authtok", authToken);
+    console.log("uid", userId);
+    event.preventDefault();
+
+    dispatch(
+      postService({
+        id: userId,
+        serviceData: setData,
+        authToken: authToken,
+      })
+    );
+  };
+  //   // navigate("otp");
 
   return (
     <>
