@@ -7,7 +7,7 @@ import Image from "react-bootstrap/Image";
 import { useRef } from "react";
 import "./PostAd.css";
 import { useDispatch } from "react-redux";
-import { postService } from "../../feature/apiSlice";
+import { postService } from "../../feature/serviceSlice";
 import CompanyNavigationBar from "../Navigation/CompanyNavigationBar";
 import { useSelector } from "react-redux";
 import { useStore } from "react-redux";
@@ -17,10 +17,11 @@ export default function PostAd() {
   // console.log(loginEmail, loginPassword);
 
   const [data, setData] = useState({
-    name: "",
+    serviceName: "",
+    companyName: "",
     price: "",
     description: "",
-    img: "",
+    img: null,
   });
 
   const store = useStore();
@@ -30,9 +31,10 @@ export default function PostAd() {
   const [isValidPrice, setIsValidPrice] = useState(false);
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
+  const [isValidCompanyName, setIsValidCompanyName] = useState(false);
   const [isValidDescription, setIsValidDescription] = useState(false);
 
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const inputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -50,11 +52,15 @@ export default function PostAd() {
     if (file && file.size > maxSizeInBytes) {
       return;
     }
+    // setImage(file);
+
+    // const { name, value } = event.target;
+
+    // setData({ ...data, [name]: value });
+    // setData({ ...data, img: image });
+
     setImage(file);
-
-    const { name, value } = event.target;
-
-    setData({ ...data, [name]: value });
+    setData({ ...data, img: file });
   };
 
   const handleChange = (event) => {
@@ -64,9 +70,14 @@ export default function PostAd() {
 
     setData({ ...data, [name]: value });
 
-    if (name === "name") {
+    if (name === "serviceName") {
       const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
       setIsValidName(isValid);
+    }
+
+    if (name === "companyName") {
+      const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
+      setIsValidCompanyName(isValid);
     }
 
     if (name === "price") {
@@ -80,13 +91,25 @@ export default function PostAd() {
   };
 
   useEffect(() => {
-    if (isValidName && isValidPrice && isValidDescription) {
+    if (
+      isValidName &&
+      isValidCompanyName &&
+      isValidPrice &&
+      isValidDescription &&
+      data.img !== null
+    ) {
       // console.log("check");
       setValidated(true);
     } else setValidated(false);
-  }, [isValidName, isValidPrice, isValidDescription]);
+  }, [
+    isValidName,
+    isValidCompanyName,
+    isValidPrice,
+    isValidDescription,
+    data.img,
+  ]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     console.log(data);
     console.log("authtok", authToken);
     console.log("uid", userId);
@@ -94,13 +117,16 @@ export default function PostAd() {
 
     dispatch(
       postService({
-        id: userId,
-        serviceData: setData,
+        userId: userId,
+        serviceName: data.serviceName,
+        companyName: data.companyName,
+        description: data.description,
+        price: data.price,
+        img: data.img,
         authToken: authToken,
       })
     );
   };
-  //   // navigate("otp");
 
   return (
     <>
@@ -123,9 +149,6 @@ export default function PostAd() {
             Create Ad
           </h2>
 
-          {/* <div className="d-flex justify-content-center align-item-center">
-            <Button variant="success">Upload</Button>{" "}
-          </div> */}
           {/* noValidate :Allows Custom Form Validation. form data should not be validated by the browser when submitted.  disables the default HTML form validation behavior provided by the browser. */}
           <div
             className="d-flex justify-content-center align-item-center "
@@ -166,7 +189,8 @@ export default function PostAd() {
               onChange={imageUpload}
               ref={inputRef}
               name="img"
-              value={data.img}
+              // value={data.img}
+              accept="image/*"
             />
           </div>
 
@@ -174,20 +198,43 @@ export default function PostAd() {
             <Form.Group controlId="ServiceName">
               <Form.Control
                 required
-                name="name"
+                name="serviceName"
                 type="text"
-                value={data.name}
+                value={data.serviceName}
                 className="outline"
                 onChange={handleChange}
-                placeholder="ServiceName"
-                isInvalid={!isValidName && data.name !== ""}
+                placeholder="Service Name"
+                isInvalid={!isValidName && data.serviceName !== ""}
                 isValid={isValidName}
               />
 
               {isValidName && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidName && data.name !== "" && (
+              {!isValidName && data.serviceName !== "" && (
+                <Form.Control.Feedback type="invalid" className="mb-1">
+                  Enter a Valid Company Name!
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+
+            <Form.Group controlId="CompanyName">
+              <Form.Control
+                required
+                name="companyName"
+                type="text"
+                value={data.companyName}
+                className="outline"
+                onChange={handleChange}
+                placeholder="Company Name"
+                isInvalid={!isValidCompanyName && data.companyName !== ""}
+                isValid={isValidCompanyName}
+              />
+
+              {isValidCompanyName && (
+                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+              )}
+              {!isValidCompanyName && data.companyName !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Company Name!
                 </Form.Control.Feedback>

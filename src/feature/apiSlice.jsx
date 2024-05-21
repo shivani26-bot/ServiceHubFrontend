@@ -111,22 +111,22 @@ export const regenerateOTP = createAsyncThunk(
   }
 );
 
-export const postService = createAsyncThunk(
-  "postCompanyData",
-  async (serviceData) => {
-    const response = await fetch(
-      "http://localhost:9000/api/serviceprovider/service",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(serviceData),
-      }
-    );
-    return response.json();
-  }
-);
+// export const postService = createAsyncThunk(
+//   "postCompanyData",
+//   async (serviceData) => {
+//     const response = await fetch(
+//       "http://localhost:9000/api/serviceprovider/service",
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-type": "application/json",
+//         },
+//         body: JSON.stringify(serviceData),
+//       }
+//     );
+//     return response.json();
+//   }
+// );
 
 const apiSlice = createSlice({
   name: "api",

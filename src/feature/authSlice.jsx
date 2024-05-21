@@ -61,19 +61,19 @@ const authSlice = createSlice({
       })
       .addCase(postLogin.fulfilled, (state, action) => {
         console.log("fullfilled", action.payload);
-        // state.loading = false;
-        // state.authToken = action.payload.authToken;
-        // state.userId = action.payload.userId;
-        // // state.user = action.payload;
-        // state.userData = action.payload.userData;
-        // state.error = null;
-        return {
-          loading: false,
-          authToken: action.payload.authToken,
-          userId: action.payload.userId,
-          userData: action.payload.userData,
-          error: null,
-        };
+        state.loading = false;
+        state.authToken = action.payload.authToken;
+        state.userId = action.payload.userId;
+        // state.user = action.payload;
+        state.userData = action.payload.userData;
+        state.error = null;
+        // return {
+        //   loading: false,
+        //   authToken: action.payload.authToken,
+        //   userId: action.payload.userId,
+        //   userData: action.payload.userData,
+        //   error: null,
+        // };
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.loading = false;

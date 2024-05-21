@@ -1,12 +1,13 @@
 import React from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 export default function ClientNavigationBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const navigation = [
     {
       name: "Dashboard",
@@ -39,7 +40,8 @@ export default function ClientNavigationBar() {
             {navigation.map((item, index) => (
               <Nav.Item style={{ marginRight: "20px" }} key={index}>
                 <Nav.Link
-                  href={item.href}
+                  // href={item.href}
+                  onClick={() => navigate(item.href)}
                   className={item.current ? "active" : ""}
                 >
                   {/* <Nav.Link as={Link} to={item.to} className={item.current ? "active" : ""}> */}

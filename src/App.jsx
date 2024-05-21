@@ -45,6 +45,7 @@ function App() {
           <Route path="/companyAds" element={<Services />} />
           <Route path="/clientLogout" element={<Login />} />
           <Route path="/companyLogout" element={<Login />} />
+          <Route path="/postReview" element={<PostReview />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -49,6 +49,7 @@ function Login() {
   const navigate = useNavigate();
 
   const { authToken, userId, userData } = useSelector((state) => state.auth);
+  // const { email, password } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
     email: "",
