@@ -4,14 +4,35 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deleteService } from "../../feature/deleteServiceSlice";
 import { useSelector } from "react-redux";
+import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
+import UpdateServiceForm from "../UpdateServiceForm/UpdateServiceForm";
+// import { fetchServiceDetails } from "../../feature/updateServiceSlice";
+import { useState } from "react";
 const ServiceCard = ({ service }) => {
+  const [showUpdateForm, setShowUpdateForm] = useState(false); // to show the modal form
   const { id, serviceName, price, description, imageUrl } = service;
+  console.log("service", service);
   console.log("id", id);
   const authToken = useSelector((state) => state.auth.authToken);
+  console.log("authToken", authToken);
+  const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
 
-  const handleDelete = () => {
-    dispatch(deleteService({ serviceId: service.id, authToken }));
+  const handleDelete = async () => {
+    try {
+      // Dispatch the deleteService action to delete the service
+      await dispatch(deleteService({ serviceId: service.id, authToken }));
+
+      // After successful deletion, fetch the updated list of services
+      await dispatch(fetchCompanyServices({ userId: userId, authToken }));
+    } catch (error) {
+      // Handle any errors if necessary
+      console.error("Error deleting service:", error);
+    }
+  };
+
+  const handleClick = () => {
+    setShowUpdateForm(true);
   };
 
   return (
@@ -32,7 +53,16 @@ const ServiceCard = ({ service }) => {
         </p>
         <hr />
         <div className="service-card-actions">
-          <button className="update-button">Update</button>
+          <button className="update-button" onClick={handleClick}>
+            Update
+          </button>
+          {showUpdateForm && (
+            <UpdateServiceForm
+              service={service}
+              // update the state in the parent component (ServiceCard) to hide the modal form when the update operation is completed.
+              onUpdate={() => setShowUpdateForm(false)}
+            />
+          )}
           <button className="delete-button" onClick={handleDelete}>
             Delete
           </button>

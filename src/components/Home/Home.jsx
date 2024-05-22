@@ -17,7 +17,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Navigation from "../Navigation/Navigation";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchServices } from "../../feature/getAllServicesSlice";
+import { fetchAllServices } from "../../feature/getAllServicesSlice";
 export default function Home() {
   // const [services, setServices] = useState([]);
   // useEffect(() => {
@@ -50,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchServices());
+      dispatch(fetchAllServices());
     }
   }, [status, dispatch]);
 

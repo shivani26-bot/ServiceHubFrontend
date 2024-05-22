@@ -1,0 +1,59 @@
+.book-service-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  cursor: pointer;
+}
+
+.calendar-icon svg {
+  font-size: 18px;
+}
+
+.date-picker {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 10px;
+}
+
+.book-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.book-button:hover {
+  background-color: #0056b3;
+}

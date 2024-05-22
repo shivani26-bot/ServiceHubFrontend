@@ -111,23 +111,6 @@ export const regenerateOTP = createAsyncThunk(
   }
 );
 
-// export const postService = createAsyncThunk(
-//   "postCompanyData",
-//   async (serviceData) => {
-//     const response = await fetch(
-//       "http://localhost:9000/api/serviceprovider/service",
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//         body: JSON.stringify(serviceData),
-//       }
-//     );
-//     return response.json();
-//   }
-// );
-
 const apiSlice = createSlice({
   name: "api",
   initialState: {
@@ -137,17 +120,6 @@ const apiSlice = createSlice({
   },
   // to handle Pending, succesfull and fail case
   extraReducers: (builder) => {
-    // builder.addCase(postLoginData.pending, (state, action) => {
-    //   state.isLoading = true;
-    // });
-    // builder.addCase(postLoginData.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   state.data = action.payload;
-    // });
-    // builder.addCase(postLoginData.rejected, (state, action) => {
-    //   console.log("Error", action.payload);
-    //   state.isError = true;
-    // });
     builder.addCase(verifyOTP.pending, (state, action) => {
       console.log("", action.payload);
       state.isLoading = true;

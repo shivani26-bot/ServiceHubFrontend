@@ -85,7 +85,7 @@ export default function PostAd() {
       setIsValidPrice(isValid);
     }
     if (name === "description") {
-      const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
+      const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.,/]*$/.test(value);
       setIsValidDescription(isValid);
     }
   };
@@ -266,6 +266,8 @@ export default function PostAd() {
             <Form.Group controlId="PostDescription">
               <Form.Control
                 required
+                as="textarea"
+                rows={5}
                 name="description"
                 type="text"
                 value={data.description}
@@ -281,7 +283,7 @@ export default function PostAd() {
               )}
               {!isValidDescription && data.description !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
-                  Enter a Valid Company Name!
+                  Enter a Valid!
                 </Form.Control.Feedback>
               )}
             </Form.Group>

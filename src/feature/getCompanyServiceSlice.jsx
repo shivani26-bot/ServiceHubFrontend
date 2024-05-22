@@ -41,7 +41,7 @@ const getCompanyServiceSlice = createSlice({
       })
       .addCase(fetchCompanyServices.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("payload{", action.payload);
+        console.log("payload", action.payload);
         state.companyServices = action.payload;
       })
       .addCase(fetchCompanyServices.rejected, (state, action) => {

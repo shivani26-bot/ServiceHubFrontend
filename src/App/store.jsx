@@ -6,15 +6,19 @@ import serviceSlice from "../feature/serviceSlice";
 import getAllServicesSlice from "../feature/getAllServicesSlice";
 import getCompanyServiceSlice from "../feature/getCompanyServiceSlice";
 import deleteServiceSlice from "../feature/deleteServiceSlice";
+import updateServiceSlice from "../feature/updateServiceSlice";
+import searchSlice from "../feature/searchSlice";
 export const reduxStore = configureStore({
   reducer: {
     display: displaySlice, //companyregister data
     api: apiSlice,
     auth: authSlice,
     services: serviceSlice,
-    getServices: getAllServicesSlice,
+    getAllServices: getAllServicesSlice,
     getCompanyServices: getCompanyServiceSlice,
     deleteService: deleteServiceSlice,
+    updateService: updateServiceSlice,
+    search: searchSlice,
   },
 });
 

@@ -53,7 +53,7 @@ function CompanySignup() {
     isValidPassword,
     isPasswordMatch,
   ]);
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     // console.log(data);
     event.preventDefault();
 

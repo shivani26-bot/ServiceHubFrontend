@@ -2,14 +2,33 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Async thunk for fetching services
-export const fetchServices = createAsyncThunk("fetchServices", async () => {
-  const response = await axios.get("http://localhost:9000/services");
-  return response.data;
-});
 
+export const fetchAllServices = createAsyncThunk(
+  "fetchAllServices",
+  async ({ authToken }, { rejectWithValue }) => {
+    try {
+      // console.log("userid authtoken", userId, authToken);
+      const response = await axios.get(
+        "http://localhost:9000/api/customer/services",
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            // "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "Network Error"
+      );
+    }
+  }
+);
 // Create the services slice
 const getAllServicesSlice = createSlice({
-  name: "getServices",
+  name: "getAllServices",
   initialState: {
     items: [],
     status: "idle",
@@ -18,14 +37,14 @@ const getAllServicesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchServices.pending, (state) => {
+      .addCase(fetchAllServices.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchServices.fulfilled, (state, action) => {
+      .addCase(fetchAllServices.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.items = action.payload;
       })
-      .addCase(fetchServices.rejected, (state, action) => {
+      .addCase(fetchAllServices.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
