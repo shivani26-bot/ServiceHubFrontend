@@ -2,12 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const ClientServiceCard = ({ service }) => {
-  const { serviceName, price, description, imageUrl, companyName } = service;
+  const { id, serviceName, price, description, imageUrl, companyName } =
+    service;
   const navigate = useNavigate();
 
   const handleViewClick = () => {
     // Navigate to /client/viewAd
-    navigate("/client/viewAd");
+    navigate(`/client/viewAd/${id}`);
   };
   return (
     <div className="service-card">

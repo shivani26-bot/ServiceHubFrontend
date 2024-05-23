@@ -20,11 +20,11 @@ function ClientSignup() {
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const [isValidTelephone, setIsValidTelephone] = useState(false);
   const [data, setData] = useState({
-    name: "",
+    firstname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    telephone: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -51,11 +51,11 @@ function ClientSignup() {
     // axios.put(`http://localhost:9000/regenerate-otp?email=${data.email}`);
     dispatch(
       customerRegister({
-        name: data.name,
+        firstname: data.firstname,
         email: data.email,
         password: data.password,
         confirmPassword: data.confirmPassword,
-        telephone: data.telephone,
+        phone: data.phone,
       })
     );
     dispatch(postCustomerData(data));
@@ -69,7 +69,7 @@ function ClientSignup() {
     const { name, value } = event.target;
 
     setData({ ...data, [name]: value });
-    if (name === "name") {
+    if (name === "firstname") {
       const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
       setIsValidName(isValid);
     }
@@ -93,7 +93,7 @@ function ClientSignup() {
       const isValid = data.password === value;
       setIsPasswordMatch(isValid);
     }
-    if (name === "telephone") {
+    if (name === "phone") {
       // either . or _ allowed between characters
       const isValid = /^[789]\d{9}$/.test(value);
       setIsValidTelephone(isValid);
@@ -124,20 +124,20 @@ function ClientSignup() {
             <Form.Group controlId="formName">
               <Form.Control
                 required
-                name="name"
+                name="firstname"
                 type="text"
-                value={data.name}
+                value={data.firstname}
                 className="outline"
                 onChange={handleChange}
                 placeholder="Name"
-                isInvalid={!isValidName && data.name !== ""}
+                isInvalid={!isValidName && data.firstname !== ""}
                 isValid={isValidName}
               />
 
               {isValidName && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidName && data.name !== "" && (
+              {!isValidName && data.firstname !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Company Name!
                 </Form.Control.Feedback>
@@ -219,19 +219,19 @@ function ClientSignup() {
             <Form.Group a controlId="formTelephone">
               <Form.Control
                 required
-                name="telephone"
+                name="phone"
                 type="tel"
                 className="outline"
                 placeholder="Telephone"
-                value={data.telephone}
+                value={data.phone}
                 onChange={handleChange}
-                isInvalid={!isValidTelephone && data.telephone !== ""}
+                isInvalid={!isValidTelephone && data.phone !== ""}
                 isValid={isValidTelephone}
               />
               {isValidTelephone && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidTelephone && data.telephone !== "" && (
+              {!isValidTelephone && data.phone !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Phone Number!
                 </Form.Control.Feedback>

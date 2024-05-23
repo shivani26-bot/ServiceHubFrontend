@@ -10,13 +10,7 @@ export const updateServiceDetails = createAsyncThunk(
       console.log("sidauth", serviceId, authToken);
       const formData = new FormData();
       Object.entries(updatedServiceData).forEach(([key, value]) => {
-        if (
-          key !== "img" &&
-          key !== "imageUrl" &&
-          key !== "userId" &&
-          key !== "id" &&
-          key !== "companyName"
-        ) {
+        if (key !== "img" && key !== "imageUrl") {
           formData.append(key, value);
         }
       });
@@ -27,7 +21,7 @@ export const updateServiceDetails = createAsyncThunk(
       }
 
       const response = await axios.put(
-        `http://localhost:9000/api/serviceUpdate?serviceId=${serviceId}`,
+        `http://localhost:9000/api/serviceprovider/serviceUpdate?serviceId=${serviceId}`,
         formData,
         {
           headers: {

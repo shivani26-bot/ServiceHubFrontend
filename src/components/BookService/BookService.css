@@ -2,8 +2,10 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  width: 300px;
-  margin: 0 auto;
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 h2 {

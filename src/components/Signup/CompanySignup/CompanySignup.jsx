@@ -25,12 +25,12 @@ function CompanySignup() {
   const [isValidAddress, setIsValidAddress] = useState(false);
   const [isValidTelephone, setIsValidTelephone] = useState(false);
   const [data, setData] = useState({
-    name: "",
+    companyName: "",
     email: "",
     password: "",
     confirmPassword: "",
     address: "",
-    telephone: "",
+    phone: "",
   });
 
   useEffect(() => {
@@ -59,12 +59,12 @@ function CompanySignup() {
 
     dispatch(
       companyRegister({
-        name: data.name,
+        companyName: data.companyName,
         email: data.email,
         password: data.password,
         confirmPassword: data.confirmPassword,
         address: data.address,
-        telephone: data.telephone,
+        phone: data.phone,
       })
     );
     // setCookie("test", data.name);
@@ -81,7 +81,7 @@ function CompanySignup() {
 
     setData({ ...data, [name]: value });
 
-    if (name === "name") {
+    if (name === "companyName") {
       const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
       setIsValidName(isValid);
     }
@@ -109,7 +109,7 @@ function CompanySignup() {
       const isValid = /^[0-9A-Za-z ,\-/():]+$/.test(value);
       setIsValidAddress(isValid);
     }
-    if (name === "telephone") {
+    if (name === "phone") {
       // either . or _ allowed between characters
       const isValid = /^[789]\d{9}$/.test(value);
       setIsValidTelephone(isValid);
@@ -140,20 +140,20 @@ function CompanySignup() {
             <Form.Group controlId="CompanyName">
               <Form.Control
                 required
-                name="name"
+                name="companyName"
                 type="text"
-                value={data.name}
+                value={data.companyName}
                 className="outline"
                 onChange={handleChange}
                 placeholder="Company Name"
-                isInvalid={!isValidName && data.name !== ""}
+                isInvalid={!isValidName && data.companyName !== ""}
                 isValid={isValidName}
               />
 
               {isValidName && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidName && data.name !== "" && (
+              {!isValidName && data.companyName !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Company Name!
                 </Form.Control.Feedback>
@@ -257,19 +257,19 @@ function CompanySignup() {
             <Form.Group a controlId="formTelephone">
               <Form.Control
                 required
-                name="telephone"
+                name="phone"
                 type="tel"
                 className="outline"
                 placeholder="Telephone"
-                value={data.telephone}
+                value={data.phone}
                 onChange={handleChange}
-                isInvalid={!isValidTelephone && data.telephone !== ""}
+                isInvalid={!isValidTelephone && data.phone !== ""}
                 isValid={isValidTelephone}
               />
               {isValidTelephone && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidTelephone && data.telephone !== "" && (
+              {!isValidTelephone && data.phone !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Phone Number!
                 </Form.Control.Feedback>

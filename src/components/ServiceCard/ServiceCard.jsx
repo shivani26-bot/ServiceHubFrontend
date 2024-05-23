@@ -8,6 +8,7 @@ import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import UpdateServiceForm from "../UpdateServiceForm/UpdateServiceForm";
 // import { fetchServiceDetails } from "../../feature/updateServiceSlice";
 import { useState } from "react";
+
 const ServiceCard = ({ service }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false); // to show the modal form
   const { id, serviceName, price, description, imageUrl } = service;

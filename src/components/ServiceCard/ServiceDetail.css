@@ -1,0 +1,49 @@
+.custom-card {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden; /* Ensure contents don't overflow */
+}
+
+.image-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.service-detail-info {
+  padding: 10px;
+  overflow: hidden; /* Ensure text doesn't overflow */
+}
+
+.service-detail-info h4,
+.service-detail-info p {
+  margin-bottom: 5px;
+  overflow-wrap: break-word; /* Wrap long words */
+}
+
+.view-ad-page {
+  display: flex;
+  justify-content: center;
+}
+
+.service-details-container {
+  display: flex;
+  margin-top: 20px;
+  height: 200px;
+}
+
+.service-detail {
+  flex: 3;
+}
+
+.book-service {
+  flex: 2;
+}
