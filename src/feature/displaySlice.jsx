@@ -19,7 +19,7 @@ export const displaySlice = createSlice({
       phone: "",
     },
     login: {
-      email: "",
+      username: "",
       password: "",
     },
   },
@@ -43,7 +43,7 @@ export const displaySlice = createSlice({
     },
     login: (state, action) => {
       console.log("inside", action.payload);
-      state.login.email = action.payload.email;
+      state.login.username = action.payload.username;
       state.login.password = action.payload.password;
     },
   },

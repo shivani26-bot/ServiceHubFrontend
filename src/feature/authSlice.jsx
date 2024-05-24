@@ -15,10 +15,6 @@ export const postLogin = createAsyncThunk(
           password,
         }
       );
-      // const authTokenString = "{" + response.data.split("}{")[1];
-      // const authTokenData = JSON.parse(authTokenString); // Assuming token is returned in the response
-      // const authToken = authTokenData["Authorization Token is"];
-      // console.log(authToken);
 
       const authTokenString = "{" + response.data.split("}{")[1];
       const authTokenData = JSON.parse(authTokenString); // Assuming token is returned in the response
@@ -45,14 +41,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     loading: false,
-    // user: null,
     error: null,
     authToken: null,
-    // userId: null,
     userId: null,
-    userData: null, // Full user data
+    userData: null,
   },
-
+  reducers: {
+    logout: (state) => {
+      state.authToken = null;
+      state.userId = null;
+      state.userData = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postLogin.pending, (state) => {
@@ -64,16 +64,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.authToken = action.payload.authToken;
         state.userId = action.payload.userId;
-        // state.user = action.payload;
         state.userData = action.payload.userData;
         state.error = null;
-        // return {
-        //   loading: false,
-        //   authToken: action.payload.authToken,
-        //   userId: action.payload.userId,
-        //   userData: action.payload.userData,
-        //   error: null,
-        // };
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.loading = false;
@@ -86,4 +78,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

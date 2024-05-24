@@ -20,7 +20,7 @@ import PostReview from "./components/PostReview/PostReview";
 import Services from "./components/Services/Services";
 import BookService from "./components/BookService/BookService";
 import ViewService from "./components/ViewService/ViewService";
-
+import Logout from "./components/Logout/Logout";
 function App() {
   // Since useLocation needs to be used within a Router component, we can't use it directly in the App component. Instead, we need to utilize it within the components that are children of a Router
   return (
@@ -45,9 +45,12 @@ function App() {
           <Route path="/companyDashboard" element={<CompanyDashBoard />} />
           <Route path="/companyPostAd" element={<PostAd />} />
           <Route path="/companyAds" element={<Services />} />
-          <Route path="/clientLogout" element={<Login />} />
-          <Route path="/companyLogout" element={<Login />} />
-          <Route path="/postReview" element={<PostReview />} />
+          <Route path="/clientLogout" element={<Logout />} />
+          <Route path="/companyLogout" element={<Logout />} />
+          <Route
+            path="/postReview/:bookId/:serviceId/:userId"
+            element={<PostReview />}
+          />
           <Route path="/client/viewAd/:serviceId" element={<ViewService />} />
         </Routes>
       </BrowserRouter>

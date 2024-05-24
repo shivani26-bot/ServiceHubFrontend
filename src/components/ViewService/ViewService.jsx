@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap";
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
 import { resetStatus } from "../../feature/serviceDetailByIdSlice";
 
+import Review from "../PostReview/Review";
 export default function ViewService() {
   const { serviceId } = useParams();
   console.log("serviceId", serviceId);
@@ -18,6 +19,9 @@ export default function ViewService() {
   const status = useSelector((state) => state.serviceDetail.status);
   const serviceDto = useSelector((state) => state.serviceDetail.serviceDto);
   console.log("serviceauth", authToken, serviceDto);
+  const reviewDtoList = useSelector(
+    (state) => state.serviceDetail.reviewDtoList
+  );
 
   useEffect(() => {
     // Reset status to idle whenever serviceId changes
@@ -42,12 +46,30 @@ export default function ViewService() {
         <div className="view-ad-page">
           <div className="service-details-container">
             <Row>
-              <Col sm={12} className="service-detail">
+              <Col sm={8} className="service-detail">
                 {serviceDto && <ServiceDetail service={serviceDto} />}
               </Col>
               <Col sm={4} className="book-service">
                 {serviceDto && <BookService serviceId={serviceDto.id} />}
               </Col>
+            </Row>
+            {/* <Row>
+              <Review serviceId={reviewDto} />
+            </Row> */}
+            <Row>
+              {reviewDtoList && reviewDtoList.length > 0 ? (
+                reviewDtoList.map((reviewDto, index) => (
+                  <Review
+                    key={index}
+                    customerName={reviewDto.customerName}
+                    review={reviewDto.review}
+                    rating={reviewDto.rating}
+                    reviewDate={reviewDto.reviewDate}
+                  />
+                ))
+              ) : (
+                <p>No reviews available</p>
+              )}
             </Row>
           </div>
         </div>

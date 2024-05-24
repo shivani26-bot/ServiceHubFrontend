@@ -12,6 +12,8 @@ import serviceDetailByIdSlice from "../feature/serviceDetailByIdSlice";
 import addBookingsSlice from "../feature/addBookingsSlice";
 import ClientBookingsSlice from "../feature/ClientBookingsSlice";
 import serviceProviderBookingsSlice from "../feature/serviceProviderBookingsSlice";
+import bookingStatusSlice from "../feature/bookingStatusSlice";
+import reviewSlice from "../feature/reviewSlice";
 export const reduxStore = configureStore({
   reducer: {
     display: displaySlice, //companyregister data
@@ -27,6 +29,8 @@ export const reduxStore = configureStore({
     bookings: addBookingsSlice,
     reservations: ClientBookingsSlice,
     serviceProviderBookings: serviceProviderBookingsSlice,
+    bookingStatus: bookingStatusSlice,
+    review: reviewSlice,
   },
 });
 

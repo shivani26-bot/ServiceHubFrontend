@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchServiceProviderBookings } from "../../../feature/serviceProviderBookingsSlice";
 import CompanyNavigationBar from "../../../components/Navigation/CompanyNavigationBar";
+import { useState } from "react";
+import { changeBookingStatus } from "../../../feature/bookingStatusSlice";
+
 export default function CompanyDashBoard() {
   const dispatch = useDispatch();
   const authToken = useSelector((state) => state.auth.authToken);
   const serviceProviderId = useSelector((state) => state.auth.userId); // Assuming userId is the service provider ID
   const bookings = useSelector((state) => state.serviceProviderBookings.items);
   const status = useSelector((state) => state.serviceProviderBookings.status);
+  const [localBookings, setLocalBookings] = useState([]);
 
   useEffect(() => {
     if (authToken && serviceProviderId) {
@@ -23,28 +27,79 @@ export default function CompanyDashBoard() {
     }
   }, [dispatch, authToken, serviceProviderId]);
 
+  useEffect(() => {
+    console.log(status);
+    if (status === "succeeded") {
+      setLocalBookings(bookings);
+    }
+    console.log(bookings);
+  }, [status, bookings]);
+
+  const handleApprove = (id, customerId) => {
+    // console.log("Clicked booking ID:", id);
+    // console.log("Previous local bookings:", localBookings);
+    // setLocalBookings((prevBookings) => {
+    //   const updatedBookings = prevBookings.map((booking) => {
+    //     console.log("Processing booking ID:", booking.id);
+    //     if (booking.id === id) {
+    //       console.log("Updating booking ID:", booking.id);
+    //       return { ...booking, bookingStatus: "APPROVED" };
+    //     }
+    //     return booking;
+    //   });
+    //   console.log("Updated bookings:", updatedBookings);
+    //   return updatedBookings;
+    // });
+
+    dispatch(
+      changeBookingStatus({
+        bookingId: id,
+        customerId,
+        status: "Approve",
+        authToken,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        setLocalBookings((prevBookings) =>
+          prevBookings.map((booking) =>
+            booking.id === id
+              ? { ...booking, bookingStatus: "APPROVED" }
+              : booking
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error approving booking:", error);
+      });
+  };
+
+  const handleReject = (id, customerId) => {
+    dispatch(
+      changeBookingStatus({
+        bookingId: id,
+        customerId,
+        status: "Reject",
+        authToken,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        setLocalBookings((prevBookings) =>
+          prevBookings.map((booking) =>
+            booking.id === id
+              ? { ...booking, bookingStatus: "REJECTED" }
+              : booking
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error rejecting booking:", error);
+      });
+  };
+
   return (
     <>
-      {/* <CompanyNavigationBar />
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>ClientName</th>
-              <th>Service</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody></tbody>
-        </table>
-        <div className="image-container">
-          <img src="/empty.png" alt="" className="centered-image" />
-        </div>
-      </div> */}
-
       <CompanyNavigationBar />
       <div className="table-container">
         <table>
@@ -59,14 +114,35 @@ export default function CompanyDashBoard() {
           </thead>
           <tbody>
             {status === "succeeded" &&
-              bookings.length > 0 &&
-              bookings.map((booking) => (
+              localBookings.length > 0 &&
+              localBookings.map((booking) => (
                 <tr key={booking.id}>
                   <td>{booking.userName}</td>
                   <td>{booking.serviceName}</td>
                   <td>{new Date(booking.bookDate).toLocaleDateString()}</td>
                   <td>{booking.bookingStatus}</td>
-                  <td>{/* Add action buttons if needed */}</td>
+                  <td>
+                    {booking.bookingStatus === "PENDING" ? (
+                      <>
+                        <button
+                          onClick={() =>
+                            handleApprove(booking.id, booking.userId)
+                          }
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleReject(booking.id, booking.userId)
+                          }
+                        >
+                          Reject
+                        </button>
+                      </>
+                    ) : (
+                      <span>No actions available</span>
+                    )}
+                  </td>
                 </tr>
               ))}
           </tbody>

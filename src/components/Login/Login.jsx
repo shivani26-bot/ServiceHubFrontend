@@ -6,7 +6,7 @@ import { login } from "../../feature/displaySlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { postLoginData } from "../../feature/apiSlice";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
 import { useStore } from "react-redux";
 function Login() {
-  const [cookies, setCookie] = useCookies(["userCookie"]);
+  // const [cookies, setCookie] = useCookies(["userCookie"]);
 
   const UserRole = {
     CUSTOMER: "CUSTOMER",
@@ -52,7 +52,7 @@ function Login() {
   // const { email, password } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -66,7 +66,13 @@ function Login() {
   // console.log("data", userData);
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(postLogin({ username: data.email, password: data.password }))
+    dispatch(
+      login({
+        username: data.username,
+        password: data.password,
+      })
+    );
+    dispatch(postLogin({ username: data.username, password: data.password }))
       .then((response) => {
         if (response.payload === "Invalid Username or Password") {
           notifyFailure(response.payload);
@@ -79,16 +85,10 @@ function Login() {
   };
 
   useEffect(() => {
-    // console.log("authToken1", authToken);
-    // console.log("user1", userId);
-    // console.log("data", userData); //{role: 'SERVICEPROVIDER', userId: 3}
     if (authToken && userId && userData) {
-      const expirationDate = new Date();
-      expirationDate.setHours(expirationDate.getHours() + 1);
-      setCookie("userCookie", authToken, {
-        path: "/",
-        expires: expirationDate,
-      });
+      sessionStorage.setItem("authToken", authToken);
+      sessionStorage.setItem("userId", userId);
+      sessionStorage.setItem("userData", JSON.stringify(userData));
 
       if (userData.role === UserRole.CUSTOMER) {
         notifySuccess();
@@ -103,9 +103,7 @@ function Login() {
       }
     }
   }, [authToken, userId, userData, navigate]);
-  // console.log("authToken1", authToken);
-  // console.log("user1", userId);
-  // console.log("data", userData);
+
   const store = useStore();
   console.log("State:", store.getState());
   return (
@@ -123,8 +121,8 @@ function Login() {
           <div className="mb-3 outline">
             <FloatingLabel controlId="floatingInput" label="Email address">
               <Form.Control
-                name="email"
-                value={data.email}
+                name="username"
+                value={data.username}
                 type="email"
                 placeholder="name@example.com"
                 onChange={handleChange}

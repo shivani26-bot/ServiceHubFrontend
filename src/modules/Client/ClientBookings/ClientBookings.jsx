@@ -5,22 +5,77 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchClientBookings } from "../../../feature/ClientBookingsSlice";
+import { useNavigate } from "react-router-dom";
+
 export default function ClientBookings() {
   const dispatch = useDispatch();
   const authToken = useSelector((state) => state.auth.authToken);
   const userId = useSelector((state) => state.auth.userId);
   const reservations = useSelector((state) => state.reservations.items);
   const status = useSelector((state) => state.reservations.status);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (authToken && userId) {
       dispatch(fetchClientBookings({ userId, authToken }));
     }
   }, [dispatch, authToken, userId]);
+
+  const handleReview = (bookId, serviceId, userId) => {
+    // Handle review logic here
+    console.log("rid", bookId, serviceId, userId);
+    navigate(`/postReview/${bookId}/${serviceId}/${userId}`);
+  };
+
+  const isDatePassed = (date) => {
+    const bookingDate = new Date(date);
+    const currentDate = new Date();
+    return bookingDate <= currentDate;
+  };
   return (
     <>
       <ClientNavigationBar />
       <div className="table-container">
-        {status === "loading" && <p>Loading reservations...</p>}
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {status === "succeeded" &&
+              reservations.length > 0 &&
+              reservations.map((reservation) => (
+                <tr key={reservation.id}>
+                  <td>{reservation.serviceName}</td>
+                  <td>{new Date(reservation.bookDate).toLocaleDateString()}</td>
+                  <td>{reservation.bookingStatus}</td>
+                  <td>
+                    {reservation.bookingStatus === "APPROVED" &&
+                    isDatePassed(reservation.bookDate) ? (
+                      <button
+                        onClick={() =>
+                          handleReview(
+                            reservation.id,
+                            reservation.serviceId,
+                            reservation.userId
+                          )
+                        }
+                      >
+                        Review
+                      </button>
+                    ) : (
+                      <span>No actions available</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
         {status === "succeeded" && reservations.length === 0 && (
           <div className="image-container">
             <img
@@ -30,28 +85,8 @@ export default function ClientBookings() {
             />
           </div>
         )}
-        {status === "succeeded" && reservations.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>Service</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reservations.map((reservation) => (
-                <tr key={reservation.id}>
-                  <td>{reservation.serviceName}</td>
-                  <td>{new Date(reservation.bookDate).toLocaleDateString()}</td>
-                  <td>{reservation.bookingStatus}</td>
-                  <td>{/* Add action buttons if needed */}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+
+        {status === "loading" && <p>Loading reservations...</p>}
         {status === "failed" && <p>Failed to load reservations.</p>}
       </div>
     </>

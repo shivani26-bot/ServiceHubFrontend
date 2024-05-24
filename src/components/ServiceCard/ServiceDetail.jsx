@@ -15,6 +15,9 @@ const ServiceDetail = ({ service }) => {
         <h3>{service.serviceName}</h3>
         <hr />
         <p>
+          <strong>Company Name:</strong> {service.companyName}
+        </p>
+        <p>
           <strong>Price:</strong> {service.price}
         </p>
         <p>

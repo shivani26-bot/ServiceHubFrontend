@@ -39,6 +39,7 @@ const ClientBookingsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchClientBookings.fulfilled, (state, action) => {
+        console.log("bookings", action.payload);
         state.status = "succeeded";
         state.items = action.payload;
       })

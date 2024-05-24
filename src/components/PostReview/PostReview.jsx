@@ -7,9 +7,16 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { yellow } from "@mui/material/colors";
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
+import { useDispatch, useSelector } from "react-redux";
+import { postReview } from "../../feature/reviewSlice";
+import { useParams } from "react-router-dom";
+
 export default function PostReview() {
-  // const [value, setValue] = React.useState(null);
-  const [data, setData] = useState({ comment: "", rating: null });
+  const { bookId, serviceId, userId } = useParams();
+  const [data, setData] = useState({ review: "", rating: null });
+  const authToken = useSelector((state) => state.auth.authToken);
+
+  const dispatch = useDispatch();
   const handleChange = (event) => {
     event.preventDefault();
 
@@ -20,6 +27,20 @@ export default function PostReview() {
 
   const handleSubmit = () => {
     console.log(data);
+
+    const { review, rating } = data;
+    console.log(review, rating, bookId, serviceId, userId);
+
+    dispatch(
+      postReview({
+        review,
+        rating,
+        serviceId,
+        bookId,
+        userId,
+        authToken,
+      })
+    );
   };
 
   return (
@@ -42,12 +63,12 @@ export default function PostReview() {
           <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
             Post Review
           </h2>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="PostComment">
               <Form.Label> Comment:</Form.Label>
               <Form.Control
-                name="comment"
-                value={data.comment}
+                name="review"
+                value={data.review}
                 as="textarea"
                 rows={3}
                 onChange={handleChange}
