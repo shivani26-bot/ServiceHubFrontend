@@ -46,31 +46,30 @@ export default function ViewService() {
         <div className="view-ad-page">
           <div className="service-details-container">
             <Row>
-              <Col sm={8} className="service-detail">
+              <Col sm={7} className="service-detail">
                 {serviceDto && <ServiceDetail service={serviceDto} />}
               </Col>
-              <Col sm={4} className="book-service">
+              <Col sm={5} className="book-service">
                 {serviceDto && <BookService serviceId={serviceDto.id} />}
               </Col>
             </Row>
             {/* <Row>
               <Review serviceId={reviewDto} />
             </Row> */}
-            <Row>
-              {reviewDtoList && reviewDtoList.length > 0 ? (
-                reviewDtoList.map((reviewDto, index) => (
-                  <Review
-                    key={index}
-                    customerName={reviewDto.customerName}
-                    review={reviewDto.review}
-                    rating={reviewDto.rating}
-                    reviewDate={reviewDto.reviewDate}
-                  />
-                ))
-              ) : (
-                <p>No reviews available</p>
-              )}
-            </Row>
+
+            {reviewDtoList && reviewDtoList.length > 0 ? (
+              reviewDtoList.map((reviewDto, index) => (
+                <Review
+                  key={index}
+                  customerName={reviewDto.customerName}
+                  review={reviewDto.review}
+                  rating={reviewDto.rating}
+                  reviewDate={reviewDto.reviewDate}
+                />
+              ))
+            ) : (
+              <p>No reviews available</p>
+            )}
           </div>
         </div>
       </>

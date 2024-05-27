@@ -7,9 +7,10 @@ const Review = ({ customerName, review, rating, reviewDate }) => {
   return (
     <Card
       sx={{
-        maxWidth: 400,
+        width: 1170,
         padding: 2,
         margin: "auto",
+        marginBottom: 4,
         borderRadius: 2,
         boxShadow: 3,
       }}

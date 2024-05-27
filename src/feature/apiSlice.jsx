@@ -1,5 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+export const postAdminData = createAsyncThunk(
+  "postAdminData",
+  async (adminData) => {
+    const response = await fetch("http://localhost:9000/admin/register", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(adminData),
+    });
+    // return response.json();
+    const text = await response.text();
+    console.log("Response from backend:", text); // Log the response payload
+
+    return text;
+  }
+);
+
 export const postCompanyData = createAsyncThunk(
   "postCompanyData",
   async (companyData) => {
@@ -13,7 +31,11 @@ export const postCompanyData = createAsyncThunk(
         body: JSON.stringify(companyData),
       }
     );
-    return response.json();
+    // return response.json();
+    const text = await response.text();
+    console.log("Response from backend:", text); // Log the response payload
+
+    return text;
   }
 );
 
@@ -30,42 +52,6 @@ export const postCustomerData = createAsyncThunk(
     return response.json();
   }
 );
-
-// export const postLoginData = createAsyncThunk(
-//   "postLoginData",
-//   async (loginData) => {
-//     const response = await fetch("http://localhost:9000/authenticate/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json",
-//       },
-//       body: JSON.stringify(loginData),
-//     });
-
-//     console.log(response);
-//     return response.json();
-// when incorrect username and password
-// const text = await response.text();
-// console.log("Response from backend:", text); // Log the response payload
-
-// return text;
-
-// when correct username and password entered
-// const data = await response.json();
-// console.log("Response from backend:", data); // Log the response payload
-// return data;
-
-// const contentType = response.headers.get("content-type");
-// console.log(contentType);
-// if (contentType && contentType.includes("application/json")) {
-//   // If the response is JSON, parse and return it
-//   return response.json();
-// } else {
-//   // If the response is plain text, return it as is
-//   return response.text();
-// }
-//   }
-// );
 
 export const verifyOTP = createAsyncThunk(
   "verifyOTP",
@@ -87,6 +73,27 @@ export const verifyOTP = createAsyncThunk(
     // const jsonString = JSON.stringify(data);
     // console.log("Response from backend:", jsonString); // Log the response payload
     // return jsonString;
+    const text = await response.text();
+    console.log("Response from backend:", text); // Log the response payload
+
+    return text;
+  }
+);
+
+export const verifyServiceProviderOTP = createAsyncThunk(
+  "verifyServiceProviderOTP",
+  async ({ email, otp }) => {
+    console.log(email, otp);
+    const response = await fetch(
+      `http://localhost:9000/verify/serviceprovider?email=${email}&otp=${otp}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ email, otp }),
+      }
+    );
     const text = await response.text();
     console.log("Response from backend:", text); // Log the response payload
 

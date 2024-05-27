@@ -21,13 +21,17 @@ import Services from "./components/Services/Services";
 import BookService from "./components/BookService/BookService";
 import ViewService from "./components/ViewService/ViewService";
 import Logout from "./components/Logout/Logout";
+// import AdminNavigation from "./components/Admin/AdminNavigation";
+// import AdminMainNavigation from "./components/Admin/AdminMainNavigation";
+import AdminSignup from "./components/Admin/AdminSignup";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminDashBoard from "./components/Admin/AdminDashboard";
+import AdminLogout from "./components/Admin/AdminLogout";
 function App() {
   // Since useLocation needs to be used within a Router component, we can't use it directly in the App component. Instead, we need to utilize it within the components that are children of a Router
   return (
     <div>
       <BrowserRouter>
-        {/* <ConditionalNavigation /> */}
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register/*" element={null}>
@@ -52,6 +56,12 @@ function App() {
             element={<PostReview />}
           />
           <Route path="/client/viewAd/:serviceId" element={<ViewService />} />
+          <Route path="/adminLogin" element={<AdminLogin />} />
+
+          <Route path="/adminRegister" element={<AdminSignup />} />
+
+          <Route path="/adminDashboard" element={<AdminDashBoard />} />
+          <Route path="/adminLogout" element={<AdminLogout />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -59,17 +69,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <Route path="/*" element={<h1>404 Page Not Found!</h1>} /> */
-}
-
-{
-  /* <BrowserRouter>
-        <CompanyNavigationBar />
-        <Routes>
-          <Route path="/CompanyDashboard" element={<CompanyDashBoard />} />
-          <Route path="/companyPostAd" element={<PostAd />} />
-        </Routes>
-      </BrowserRouter> */
-}

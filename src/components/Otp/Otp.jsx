@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { regenerateOTP, verifyOTP } from "../../feature/apiSlice";
 import { useRef } from "react";
 import Navigation from "../Navigation/Navigation";
+import { verifyServiceProviderOTP } from "../../feature/apiSlice";
 function Otp() {
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
   const [minutes, setMinutes] = useState(0);
@@ -24,6 +25,17 @@ function Otp() {
   const navigate = useNavigate();
   const notifyRegister = () =>
     toast.success("Registered Successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const notifyWait = (msg) =>
+    toast.success(msg, {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
@@ -103,29 +115,58 @@ function Otp() {
     const otpString = otp.join("");
     console.log(otpString);
     let email;
-    if (companyEmail) email = companyEmail;
-    if (customerEmail) email = customerEmail;
+    let isCustomer = false;
 
-    dispatch(verifyOTP({ email, otp: otpString }))
-      .then((response) => {
-        if (
-          response.payload ===
-          "Congratulations! Your OTP has been successfully verified. You can now proceed to login to ServiceHub and explore our services."
-        ) {
-          notifyRegister();
-          setTimeout(() => {
-            navigate("/login");
-          }, 4000);
-        } else {
-          notifyFailure(response.payload);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        // Handle error notification if needed
-      });
+    if (customerEmail) {
+      email = customerEmail;
+      isCustomer = true;
+    } else if (companyEmail) {
+      email = companyEmail;
+    }
+
+    console.log("customerEmail", customerEmail);
+    console.log("companyEmail", companyEmail);
+
+    if (isCustomer) {
+      dispatch(verifyOTP({ email, otp: otpString }))
+        .then((response) => {
+          if (
+            response.payload ===
+            "Congratulations! Your OTP has been successfully verified. You can now proceed to login to ServiceHub and explore our services."
+          ) {
+            notifyRegister();
+            setTimeout(() => {
+              navigate("/login");
+            }, 4000);
+          } else {
+            notifyFailure(response.payload);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          // Handle error notification if needed
+        });
+    } else {
+      dispatch(verifyServiceProviderOTP({ email, otp: otpString }))
+        .then((response) => {
+          if (
+            response.payload ===
+            "Success! Your OTP has been verified. Please await approval from the ServiceHubAdmin"
+          ) {
+            notifyWait(response.payload);
+            setTimeout(() => {
+              navigate("/login");
+            }, 4000);
+          } else {
+            notifyFailure(response.payload);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          // Handle error notification if needed
+        });
+    }
   };
-
   return (
     <>
       <Navigation />

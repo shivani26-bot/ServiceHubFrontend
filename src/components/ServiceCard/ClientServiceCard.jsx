@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./ServiceCard";
 const ClientServiceCard = ({ service }) => {
   const { id, serviceName, price, description, imageUrl, companyName } =
     service;
@@ -11,7 +11,7 @@ const ClientServiceCard = ({ service }) => {
     navigate(`/client/viewAd/${id}`);
   };
   return (
-    <div className="service-card">
+    <div className="service-card service-card-width">
       <img src={imageUrl} alt={serviceName} className="service-card-img" />
       <div className="service-card-details">
         <h3>{serviceName}</h3>

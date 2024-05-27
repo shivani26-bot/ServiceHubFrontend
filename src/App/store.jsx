@@ -14,6 +14,7 @@ import ClientBookingsSlice from "../feature/ClientBookingsSlice";
 import serviceProviderBookingsSlice from "../feature/serviceProviderBookingsSlice";
 import bookingStatusSlice from "../feature/bookingStatusSlice";
 import reviewSlice from "../feature/reviewSlice";
+import pendingRegistrationSlice from "../feature/pendingRegistrationSlice";
 export const reduxStore = configureStore({
   reducer: {
     display: displaySlice, //companyregister data
@@ -31,6 +32,7 @@ export const reduxStore = configureStore({
     serviceProviderBookings: serviceProviderBookingsSlice,
     bookingStatus: bookingStatusSlice,
     review: reviewSlice,
+    pendingRegistration: pendingRegistrationSlice,
   },
 });
 

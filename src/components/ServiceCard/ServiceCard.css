@@ -1,11 +1,12 @@
-/* src/components/ServiceCard.css */
 .service-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 600px;
-  margin: 20px auto;
+  /* max-width: 680px; */
+  margin-top: 30px;
+  margin-left: 125px;
+  margin-bottom: 30px;
   padding: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -14,6 +15,9 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.service-card-width {
+  width: 1200px;
+}
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

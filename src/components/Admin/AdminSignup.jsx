@@ -1,21 +1,16 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useEffect } from "react";
-import "./CompanySignup.css";
+// import "./ClientSignup.css";
 import { useNavigate } from "react-router-dom";
-import { companyRegister } from "../../../feature/displaySlice";
-import { useSelector, useDispatch } from "react-redux";
-import { postCompanyData } from "../../../feature/apiSlice";
-// import { createPost } from "../../../LocalApi";
-// import { useNavigate } from "react-router-dom";
-import { regenerateOTP } from "../../../feature/apiSlice";
-import Navigation from "../../Navigation/Navigation";
+import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { postAdminData } from "../../feature/apiSlice";
+import AdminMainNavigation from "./AdminMainNavigation";
 
-import { useCookies } from "react-cookie";
-function CompanySignup() {
+function AdminSignup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,19 +19,17 @@ function CompanySignup() {
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
-  const [isValidAddress, setIsValidAddress] = useState(false);
   const [isValidTelephone, setIsValidTelephone] = useState(false);
   const [data, setData] = useState({
-    companyName: "",
+    firstname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    address: "",
     phone: "",
   });
 
-  const notifySuccess = () =>
-    toast.success("OTP has been sent successfully!", {
+  const notifySuccess = (msg) =>
+    toast.success(msg, {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
@@ -63,7 +56,6 @@ function CompanySignup() {
     if (
       isValidName &&
       isValidEmail &&
-      isValidAddress &&
       isValidTelephone &&
       isValidPassword &&
       isPasswordMatch
@@ -74,39 +66,21 @@ function CompanySignup() {
   }, [
     isValidName,
     isValidEmail,
-    isValidAddress,
     isValidTelephone,
     isValidPassword,
     isPasswordMatch,
   ]);
-  const handleSubmit = (event) => {
-    // console.log(data);
-    event.preventDefault();
-
-    dispatch(
-      companyRegister({
-        companyName: data.companyName,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmPassword,
-        address: data.address,
-        phone: data.phone,
-      })
-    );
-    // setCookie("test", data.name);
-    // dispatch(postCompanyData(data));
-    dispatch(postCompanyData(data))
+  const handleSubmit = () => {
+    console.log(data);
+    dispatch(postAdminData(data))
       .then((response) => {
-        if (
-          response.payload ===
-          "Service Provider Already Registered with this Email"
-        ) {
-          notifyFailure(response.payload);
-        } else {
-          notifySuccess();
+        if (response.payload === "Admin registered successfully.") {
+          notifySuccess(response.payload);
           setTimeout(() => {
-            navigate("otp");
-          }, 6000);
+            navigate("/adminLogin");
+          }, 3000);
+        } else {
+          notifyFailure(response.payload);
         }
       })
       .catch((error) => {
@@ -114,10 +88,6 @@ function CompanySignup() {
         // Handle error notification if needed
       });
   };
-  // dispatch(regenerateOTP(data.email));
-
-  // navigate("otp");
-  // };
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -125,8 +95,7 @@ function CompanySignup() {
     const { name, value } = event.target;
 
     setData({ ...data, [name]: value });
-
-    if (name === "companyName") {
+    if (name === "firstname") {
       const isValid = /^[A-Za-z0-9][A-Za-z0-9\s&'-.]*$/.test(value);
       setIsValidName(isValid);
     }
@@ -150,10 +119,6 @@ function CompanySignup() {
       const isValid = data.password === value;
       setIsPasswordMatch(isValid);
     }
-    if (name === "address") {
-      const isValid = /^[0-9A-Za-z ,\-/():]+$/.test(value);
-      setIsValidAddress(isValid);
-    }
     if (name === "phone") {
       // either . or _ allowed between characters
       const isValid = /^[789]\d{9}$/.test(value);
@@ -163,7 +128,7 @@ function CompanySignup() {
 
   return (
     <>
-      <Navigation />
+      <AdminMainNavigation />
       <div
         style={{ marginTop: "100px", marginBottom: "100px" }}
         className="d-flex justify-content-center align-items-center "
@@ -178,27 +143,27 @@ function CompanySignup() {
           }}
         >
           <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-            Company Signup
+            Admin Signup
           </h2>
           {/* noValidate :Allows Custom Form Validation. form data should not be validated by the browser when submitted.  disables the default HTML form validation behavior provided by the browser. */}
           <Form noValidate onSubmit={handleSubmit}>
-            <Form.Group controlId="CompanyName">
+            <Form.Group controlId="formName">
               <Form.Control
                 required
-                name="companyName"
+                name="firstname"
                 type="text"
-                value={data.companyName}
+                value={data.firstname}
                 className="outline"
                 onChange={handleChange}
-                placeholder="Company Name"
-                isInvalid={!isValidName && data.companyName !== ""}
+                placeholder="Name"
+                isInvalid={!isValidName && data.firstname !== ""}
                 isValid={isValidName}
               />
 
               {isValidName && (
                 <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               )}
-              {!isValidName && data.companyName !== "" && (
+              {!isValidName && data.firstname !== "" && (
                 <Form.Control.Feedback type="invalid" className="mb-1">
                   Enter a Valid Company Name!
                 </Form.Control.Feedback>
@@ -277,28 +242,6 @@ function CompanySignup() {
               )}
             </Form.Group>
 
-            <Form.Group controlId="Companyaddress">
-              <Form.Control
-                name="address"
-                type="text"
-                className="outline"
-                placeholder="Address"
-                required
-                value={data.address}
-                onChange={handleChange}
-                isInvalid={!isValidAddress && data.address !== ""}
-                isValid={isValidAddress}
-              />
-              {isValidAddress && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              {!isValidAddress && data.address !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Enter a Valid Addess!
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
-
             <Form.Group a controlId="formTelephone">
               <Form.Control
                 required
@@ -337,7 +280,7 @@ function CompanySignup() {
           </Form>
           <p className="d-flex justify-content-center align-items-center">
             Already have an account?
-            <a href="/login" className="register-link font-weight-bold ">
+            <a href="/adminLogin" className="register-link font-weight-bold ">
               login now!
             </a>
           </p>
@@ -359,4 +302,4 @@ function CompanySignup() {
   );
 }
 
-export default CompanySignup;
+export default AdminSignup;

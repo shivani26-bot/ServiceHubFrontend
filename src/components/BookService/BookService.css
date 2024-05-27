@@ -3,20 +3,20 @@
   border-radius: 8px;
   padding: 20px;
   width: 400px;
-  height: 200px;
-  margin: auto;
-  margin-top: 20px;
+  height: 255px;
+  margin-left: 50px;
+  margin-top: 30px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .date-picker-container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .calendar-icon {
@@ -24,7 +24,7 @@ h2 {
   align-items: center;
   justify-content: center;
   width: 40px;
-  height: 40px;
+  height: 46px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-top-left-radius: 8px;
@@ -33,7 +33,7 @@ h2 {
 }
 
 .calendar-icon svg {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .date-picker {
