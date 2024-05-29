@@ -4,8 +4,7 @@ import Form from "react-bootstrap/Form";
 import "./ClientSignup.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { customerRegister } from "../../../feature/displaySlice";
 import { postCustomerData } from "../../../feature/apiSlice";
 import Navigation from "../../Navigation/Navigation";
@@ -147,6 +146,7 @@ function ClientSignup() {
   return (
     <>
       <Navigation />
+      {/* <div className="background-image-container"> */}
       <div
         style={{ marginTop: "100px", marginBottom: "100px" }}
         className="d-flex justify-content-center align-items-center "
@@ -316,6 +316,7 @@ function ClientSignup() {
           />
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }

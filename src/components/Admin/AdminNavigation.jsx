@@ -23,6 +23,13 @@ export default function AdminNavigation() {
   return (
     <Navbar expand="lg" className="sticky bg-red">
       <Container>
+        <div className="brand-images">
+          <img
+            src="/public/ServiceHub4.PNG"
+            alt="Second Logo"
+            className="logo"
+          />
+        </div>
         <Navbar.Brand className="brand">ServiceHub Admin Portal</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

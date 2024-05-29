@@ -4,9 +4,8 @@ import "./Home.css";
 export default function Home() {
   return (
     <div className="home-container">
-      <header className="header">
-        <Navigation />
-      </header>
+      <Navigation />
+
       <main className="main-content">
         <div className="overlay">
           <h1>Welcome to ServiceHUB</h1>

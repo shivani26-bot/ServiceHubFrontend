@@ -164,6 +164,7 @@ function CompanySignup() {
   return (
     <>
       <Navigation />
+      {/* <div className="background-image-container"> */}
       <div
         style={{ marginTop: "100px", marginBottom: "100px" }}
         className="d-flex justify-content-center align-items-center "
@@ -355,6 +356,7 @@ function CompanySignup() {
           />
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }

@@ -43,10 +43,7 @@ function Register() {
     <>
       <Navigation />
       <div className="background-image-container">
-        <Container
-          style={{ marginTop: "1px" }}
-          className="text-center d-flex justify-content-center align-items-center"
-        >
+        <Container className="text-center d-flex justify-content-center align-items-center">
           <Card style={{ height: "auto", width: "410px" }}>
             <Card.Body>
               <div className="mb-4">

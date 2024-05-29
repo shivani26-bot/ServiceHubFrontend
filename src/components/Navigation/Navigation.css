@@ -24,3 +24,13 @@
   color: white;
   background-color: red;
 }
+
+.brand-images {
+  display: flex;
+  align-items: center;
+}
+
+.brand-images .logo {
+  height: 60px; /* Adjust the height as needed */
+  margin-right: 10px; /* Space between images */
+}

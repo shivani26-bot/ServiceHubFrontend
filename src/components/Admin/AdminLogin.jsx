@@ -134,12 +134,12 @@ function AdminLogin() {
               />
             </FloatingLabel>
           </div>
-          <Form.Check
+          {/* <Form.Check
             type={"checkbox"}
             id={`default-${"checkbox"}`}
             label={`Remember me`}
             className="mb-3"
-          />
+          /> */}
           <Button className="custom-button mb-2" onClick={handleSubmit}>
             Login
           </Button>
