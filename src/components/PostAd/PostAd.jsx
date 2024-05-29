@@ -11,7 +11,12 @@ import { postService } from "../../feature/serviceSlice";
 import CompanyNavigationBar from "../Navigation/CompanyNavigationBar";
 import { useSelector } from "react-redux";
 import { useStore } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 export default function PostAd() {
+  const navigate = useNavigate();
   // const [cookies, setCookie] = useCookies(["userCookie"]);
   const dispatch = useDispatch();
   // console.log(loginEmail, loginPassword);
@@ -40,6 +45,30 @@ export default function PostAd() {
   const handleImageClick = () => {
     inputRef.current.click();
   };
+
+  const notifySuccess = (msg) =>
+    toast.success(msg, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const notifyFailure = (msg) =>
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   const imageUpload = (event) => {
     console.log(event);
@@ -115,6 +144,18 @@ export default function PostAd() {
     console.log("uid", userId);
     event.preventDefault();
 
+    // dispatch(
+    //   postService({
+    //     userId: userId,
+    //     serviceName: data.serviceName,
+    //     companyName: data.companyName,
+    //     description: data.description,
+    //     price: data.price,
+    //     img: data.img,
+    //     authToken: authToken,
+    //   })
+    // );
+
     dispatch(
       postService({
         userId: userId,
@@ -125,7 +166,22 @@ export default function PostAd() {
         img: data.img,
         authToken: authToken,
       })
-    );
+    )
+      .then((response) => {
+        if (response.payload === "Service Added Successfully") {
+          notifySuccess(response.payload);
+
+          setTimeout(() => {
+            navigate("/companyAds");
+          }, 3000);
+        } else {
+          notifyFailure(response.payload);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error notification if needed
+      });
   };
 
   return (
@@ -301,6 +357,18 @@ export default function PostAd() {
               Add
             </Button>
           </Form>
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </div>
       </div>
     </>

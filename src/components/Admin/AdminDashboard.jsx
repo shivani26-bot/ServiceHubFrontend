@@ -7,7 +7,6 @@ import { rejectRegistration } from "../../feature/pendingRegistrationSlice";
 import AdminNavigation from "./AdminNavigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 
 export default function AdminDashBoard() {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ export default function AdminDashBoard() {
   const pendingRegistration = useSelector(
     (state) => state.pendingRegistration.items
   );
-
+  console.log(pendingRegistration);
   const status = useSelector((state) => state.pendingRegistration.status);
   const error = useSelector((state) => state.pendingRegistration.error);
   // Assuming userId is the service provider ID
@@ -35,7 +34,7 @@ export default function AdminDashBoard() {
     });
 
   const notifyRejection = () =>
-    toast.success("Rejected Successfully", {
+    toast.error("Rejected Successfully", {
       position: "top-right",
       autoClose: 1000,
       hideProgressBar: false,
@@ -73,6 +72,7 @@ export default function AdminDashBoard() {
           notifyFailure(response.payload);
         } else {
           notifySuccess();
+          dispatch(fetchPendingRegistrations(authToken));
         }
       })
       .catch((error) => {
@@ -89,7 +89,8 @@ export default function AdminDashBoard() {
         ) {
           notifyRejection(response.payload);
         } else {
-          notifySuccess();
+          notifyRejection();
+          dispatch(fetchPendingRegistrations(authToken));
         }
       })
       .catch((error) => {
@@ -133,18 +134,12 @@ export default function AdminDashBoard() {
                   </td>
                   <td>{provider.approveStatus}</td>
                   <td>
-                    {provider.approveStatus === "PENDING" ? (
-                      <>
-                        <button onClick={() => handleApprove(provider.id)}>
-                          Approve
-                        </button>
-                        <button onClick={() => handleReject(provider.id)}>
-                          Reject
-                        </button>
-                      </>
-                    ) : (
-                      provider.approveStatus
-                    )}
+                    <button onClick={() => handleApprove(provider.id)}>
+                      Approve
+                    </button>
+                    <button onClick={() => handleReject(provider.id)}>
+                      Reject
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -43,12 +43,11 @@ export const approveRegistration = createAsyncThunk(
 
 // Async thunk for rejecting registration
 export const rejectRegistration = createAsyncThunk(
-  "pendingRegistrations/rejectRegistration",
+  "rejectRegistration",
   async ({ userId, authToken }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        "http://localhost:9000/admin/reject-registration",
-        userId,
+        `http://localhost:9000/admin/reject-registration?userId=${userId}`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,

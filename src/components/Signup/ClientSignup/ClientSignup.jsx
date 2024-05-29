@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { customerRegister } from "../../../feature/displaySlice";
 import { postCustomerData } from "../../../feature/apiSlice";
 import Navigation from "../../Navigation/Navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ClientSignup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,6 +29,30 @@ function ClientSignup() {
     confirmPassword: "",
     phone: "",
   });
+
+  const notifySuccess = () =>
+    toast.success("OTP has been sent successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const notifyFailure = (msg) =>
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   useEffect(() => {
     if (
@@ -58,9 +85,26 @@ function ClientSignup() {
         phone: data.phone,
       })
     );
-    dispatch(postCustomerData(data));
+    // dispatch(postCustomerData(data));
 
-    navigate("otp");
+    dispatch(postCustomerData(data))
+      .then((response) => {
+        if (
+          response.payload === "Customer Already Registered with this Email"
+        ) {
+          notifyFailure(response.payload);
+        } else {
+          notifySuccess();
+          setTimeout(() => {
+            navigate("otp");
+          }, 6000);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error notification if needed
+      });
+    // navigate("otp");
   };
 
   const handleChange = (event) => {
@@ -258,6 +302,18 @@ function ClientSignup() {
               login now!
             </a>
           </p>
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </div>
       </div>
     </>

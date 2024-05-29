@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%; /* Ensure body and html take full height */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background: #121481;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px; /* To offset fixed header */
+  height: 100vh; /* Full viewport height */
+  box-sizing: border-box;
+  background-image: url("/public/R.jpg"); /* Adjust the path as necessary */
+  background-size: cover; /* Ensure the image covers the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.overlay {
+  background: rgba(18, 20, 129, 0.8); /* Add some transparency to the overlay */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+.about-us {
+  background: #f4f4f4;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.about-us h2 {
+  font-size: 2.5em;
+  color: #121481;
+  margin-bottom: 20px;
+}
+
+.about-us p {
+  font-size: 1.2em;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer {
+  background: #121481;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: auto;
+}

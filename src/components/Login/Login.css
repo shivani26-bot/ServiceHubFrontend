@@ -1,3 +1,63 @@
+/* .bkg{
+  background-image: url("/public/R.jpg"); 
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+.form-container {
+  width: 300px; 
+  padding: 20px;
+  border: 1px solid #121481; 
+  border-radius: 5px; 
+  background-color: #f9f9f9; 
+}
+
+.outline {
+  border: 1px solid #121481;
+  border-radius: 5px;
+}
+.login-title {
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+.login-title h2 {
+  font-size: 24px; 
+} */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%; /* Ensure body and html take full height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.bkg {
+  background-image: url("/public/R.jpg"); /* Adjust the path as necessary */
+  background-size: cover; /* Ensure the image covers the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
 .centered-container {
   display: flex;
   justify-content: center;
@@ -17,6 +77,7 @@
   border: 1px solid #121481;
   border-radius: 5px;
 }
+
 .login-title {
   text-align: center; /* Center the text */
   margin-bottom: 20px; /* Add some space between the title and the form */

@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import UpdateServiceForm from "../UpdateServiceForm/UpdateServiceForm";
 // import { fetchServiceDetails } from "../../feature/updateServiceSlice";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const ServiceCard = ({ service }) => {
@@ -18,11 +20,24 @@ const ServiceCard = ({ service }) => {
   console.log("authToken", authToken);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
-
+  // const notifySuccess = (msg) =>
+  //   toast.success(msg, {
+  //     position: "top-right",
+  //     autoClose: 1000,
+  //     hideProgressBar: false,
+  //     closeOnClick: false,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored",
+  //   });
   const handleDelete = async () => {
     try {
-      // Dispatch the deleteService action to delete the service
-      await dispatch(deleteService({ serviceId: service.id, authToken }));
+      const response = await dispatch(
+        deleteService({ serviceId: service.id, authToken })
+      );
+      if (response) alert("Service Deleted Successfully");
+      // notifySuccess("Service Deleted successfully!");
 
       // After successful deletion, fetch the updated list of services
       await dispatch(fetchCompanyServices({ userId: userId, authToken }));
@@ -37,7 +52,7 @@ const ServiceCard = ({ service }) => {
   };
 
   return (
-    <div className="service-card">
+    <div className="service-card service-card-width">
       <img
         src={service.imageUrl}
         alt={service.serviceName}
@@ -61,12 +76,26 @@ const ServiceCard = ({ service }) => {
             <UpdateServiceForm
               service={service}
               // update the state in the parent component (ServiceCard) to hide the modal form when the update operation is completed.
-              onUpdate={() => setShowUpdateForm(false)}
+              onUpdate={() => {
+                setShowUpdateForm(false);
+              }}
             />
           )}
           <button className="delete-button" onClick={handleDelete}>
             Delete
           </button>
+          {/* <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          /> */}
         </div>
       </div>
     </div>

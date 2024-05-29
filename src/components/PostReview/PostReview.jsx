@@ -9,13 +9,26 @@ import { yellow } from "@mui/material/colors";
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { postReview } from "../../feature/reviewSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PostReview() {
   const { bookId, serviceId, userId } = useParams();
+  const navigate = useNavigate();
   const [data, setData] = useState({ review: "", rating: null });
   const authToken = useSelector((state) => state.auth.authToken);
-
+  const notifySuccess = () =>
+    toast.success("Thank you for sharing your feedback with us!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   const dispatch = useDispatch();
   const handleChange = (event) => {
     event.preventDefault();
@@ -41,6 +54,10 @@ export default function PostReview() {
         authToken,
       })
     );
+    notifySuccess();
+    setTimeout(() => {
+      navigate("/clientDashboard");
+    }, 5000);
   };
 
   return (
@@ -111,6 +128,18 @@ export default function PostReview() {
           </Form>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

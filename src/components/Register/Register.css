@@ -1,4 +1,4 @@
-.custom-button {
+/* .custom-button {
   width: 250px;
   background-color: black;
   color: white;
@@ -11,4 +11,34 @@
   height: 250px;
   width: 300px;
   border: 1px solid #121481;
+} */
+/* Importing CSS from Bootstrap if not already done */
+/* @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'; */
+
+.custom-button {
+  width: 250px;
+  background-color: black;
+  color: white;
+  margin: auto;
+}
+
+.custom-button:hover {
+  background-color: #121481;
+}
+
+.card {
+  height: 250px;
+  width: 300px;
+  border: 1px solid #121481;
+}
+
+.background-image-container {
+  background-image: url("/public/R.jpg"); /* Adjust the path as necessary */
+  background-size: cover; /* Ensure the image covers the entire section */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

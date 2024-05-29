@@ -7,7 +7,8 @@ import { fetchServiceProviderBookings } from "../../../feature/serviceProviderBo
 import CompanyNavigationBar from "../../../components/Navigation/CompanyNavigationBar";
 import { useState } from "react";
 import { changeBookingStatus } from "../../../feature/bookingStatusSlice";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function CompanyDashBoard() {
   const dispatch = useDispatch();
   const authToken = useSelector((state) => state.auth.authToken);
@@ -15,7 +16,28 @@ export default function CompanyDashBoard() {
   const bookings = useSelector((state) => state.serviceProviderBookings.items);
   const status = useSelector((state) => state.serviceProviderBookings.status);
   const [localBookings, setLocalBookings] = useState([]);
-
+  const notifySuccess = () =>
+    toast.success("Booking Approved Successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const notifyFailure = () =>
+    toast.error("Booking Rejected Successfully!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   useEffect(() => {
     if (authToken && serviceProviderId) {
       dispatch(
@@ -68,7 +90,9 @@ export default function CompanyDashBoard() {
               : booking
           )
         );
+        notifySuccess();
       })
+
       .catch((error) => {
         console.error("Error approving booking:", error);
       });
@@ -92,6 +116,7 @@ export default function CompanyDashBoard() {
               : booking
           )
         );
+        notifyFailure();
       })
       .catch((error) => {
         console.error("Error rejecting booking:", error);
@@ -159,6 +184,18 @@ export default function CompanyDashBoard() {
         {status === "loading" && <p>Loading bookings...</p>}
         {status === "failed" && <p>Failed to load bookings.</p>}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 }

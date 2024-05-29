@@ -106,7 +106,7 @@ function CompanySignup() {
           notifySuccess();
           setTimeout(() => {
             navigate("otp");
-          }, 6000);
+          }, 4000);
         }
       })
       .catch((error) => {
