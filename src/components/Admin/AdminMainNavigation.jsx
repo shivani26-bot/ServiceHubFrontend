@@ -21,17 +21,16 @@ function AdminMainNavigation() {
   ];
 
   return (
-    <Navbar expand="lg" className="sticky bg-red">
+    <Navbar expand="lg" className="sticky bg-red" variant="dark">
       <Container>
         <div className="brand-images">
-          <img
-            src="/public/ServiceHub4.PNG"
-            alt="Second Logo"
-            className="logo"
-          />
+          <img src="/ServiceHub4.PNG" alt="Second Logo" className="logo" />
         </div>
         <Navbar.Brand className="brand">ServiceHub Admin Portal</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          style={{ borderColor: "white" }}
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto" variant="pills">
             {navigation.map((item, index) => (

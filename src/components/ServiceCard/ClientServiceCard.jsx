@@ -15,7 +15,7 @@ const ClientServiceCard = ({ service }) => {
       <img src={imageUrl} alt={serviceName} className="service-card-img" />
       <div className="service-card-details">
         <h3>{serviceName}</h3>
-        <hr />
+        <hr style={{ borderColor: "black", borderWidth: "2px" }} />
         <p>
           <strong>Company Name:</strong> {companyName}
         </p>
@@ -25,7 +25,7 @@ const ClientServiceCard = ({ service }) => {
         <p>
           <strong>Description:</strong> {description}
         </p>
-        <hr />
+        <hr style={{ borderColor: "black", borderWidth: "2px" }} />
         <div className="service-card-actions">
           <button className="view-button" onClick={handleViewClick}>
             View

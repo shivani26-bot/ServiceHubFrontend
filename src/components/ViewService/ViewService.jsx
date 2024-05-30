@@ -68,7 +68,16 @@ export default function ViewService() {
                 />
               ))
             ) : (
-              <p>No reviews available</p>
+              <div style={{ textAlign: "center" }}>
+                <div className="image-container">
+                  <img
+                    src="/empty.png"
+                    alt="No Bookings"
+                    className="centered-image"
+                  />
+                </div>
+                <p>No reviews available</p>
+              </div>
             )}
           </div>
         </div>

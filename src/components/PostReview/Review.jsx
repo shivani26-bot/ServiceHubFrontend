@@ -7,9 +7,12 @@ const Review = ({ customerName, review, rating, reviewDate }) => {
   return (
     <Card
       sx={{
-        width: 1170,
+        width: "auto",
+        height: "auto",
         padding: 2,
-        margin: "auto",
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 2,
         marginBottom: 4,
         borderRadius: 2,
         boxShadow: 3,
@@ -18,7 +21,7 @@ const Review = ({ customerName, review, rating, reviewDate }) => {
       <Typography variant="h6" component="div" gutterBottom>
         {customerName}
       </Typography>
-      <Divider />
+      <Divider style={{ borderColor: "black", borderWidth: "1px" }} />
       <Box sx={{ mt: 2 }}>
         <Typography variant="body1" component="div">
           Review: {review}
@@ -29,7 +32,7 @@ const Review = ({ customerName, review, rating, reviewDate }) => {
           </Typography>
           <Rating value={rating} readOnly />
         </Box>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+        <Typography variant="body2" sx={{ mt: 1 }}>
           Posted on: {new Date(reviewDate).toLocaleDateString()}
         </Typography>
       </Box>

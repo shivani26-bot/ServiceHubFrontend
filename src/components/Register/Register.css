@@ -1,26 +1,26 @@
-/* .custom-button {
-  width: 250px;
-  background-color: black;
-  color: white;
-  margin: auto;
-}
-.custom-button:hover {
-  background-color: #121481;
-}
-.card {
-  height: 250px;
-  width: 300px;
-  border: 1px solid #121481;
-} */
-/* Importing CSS from Bootstrap if not already done */
-/* @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'; */
-
 .custom-button {
   width: 250px;
   background-color: black;
   color: white;
   margin: auto;
 }
+.custom-button:hover {
+  background-color: #121481;
+}
+.card {
+  height: 250px;
+  width: 300px;
+  border: 1px solid #121481;
+}
+/* Importing CSS from Bootstrap if not already done */
+/* @import 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'; */
+
+/* .custom-button {
+  width: 250px;
+  background-color: black;
+  color: white;
+  margin: auto;
+}
 
 .custom-button:hover {
   background-color: #121481;
@@ -30,7 +30,7 @@
   height: 250px;
   width: 300px;
   border: 1px solid #121481;
-}
+} */
 /* 
 .background-image-container {
   background-image: url("/public/office.png");
@@ -41,12 +41,12 @@
   justify-content: center;
   align-items: center;
 } */
-.background-image-container {
+/* .background-image-container {
   background-image: url("/public/office.png");
   position: relative;
   min-height: 100vh;
-  background-repeat: no-repeat; /* Full viewport height */
-  /* background-position: center; */
+  background-repeat: no-repeat; 
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,8 +54,8 @@
 }
 
 .background-image-container::before {
-  content: ""; /* Create a pseudo-element */
-  position: absolute; /* Position absolute to overlay on top of the background image */
+  content: ""; 
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
@@ -65,6 +65,6 @@
     255,
     255,
     0.5
-  ); /* Semi-transparent white background */
-  backdrop-filter: blur(0.5px); /* Apply a blur effect to the background */
-}
+  );
+  backdrop-filter: blur(0.5px); 
+} */

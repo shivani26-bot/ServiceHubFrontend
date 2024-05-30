@@ -134,10 +134,47 @@ export default function AdminDashBoard() {
                   </td>
                   <td>{provider.approveStatus}</td>
                   <td>
-                    <button onClick={() => handleApprove(provider.id)}>
+                    <button
+                      style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 20px",
+                        marginRight: "10px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        transition: "background-color 0.3s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.backgroundColor = "darkgreen")
+                      }
+                      onMouseOut={(e) =>
+                        (e.target.style.backgroundColor = "green")
+                      }
+                      onClick={() => handleApprove(provider.id)}
+                    >
                       Approve
                     </button>
-                    <button onClick={() => handleReject(provider.id)}>
+                    <button
+                      style={{
+                        backgroundColor: "red",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        fontSize: "16px",
+                        transition: "background-color 0.3s",
+                      }}
+                      onMouseOver={(e) =>
+                        (e.target.style.backgroundColor = "darkred")
+                      }
+                      onMouseOut={(e) =>
+                        (e.target.style.backgroundColor = "red")
+                      }
+                      onClick={() => handleReject(provider.id)}
+                    >
                       Reject
                     </button>
                   </td>
@@ -145,6 +182,15 @@ export default function AdminDashBoard() {
               ))}
           </tbody>
         </table>
+        {status === "succeeded" && pendingRegistration.length === 0 && (
+          <div className="image-container">
+            <img
+              src="/empty.png"
+              alt="No Bookings"
+              className="centered-image"
+            />
+          </div>
+        )}
         <ToastContainer
           position="top-right"
           autoClose={1000}

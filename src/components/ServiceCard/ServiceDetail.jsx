@@ -5,15 +5,15 @@ const ServiceDetail = ({ service }) => {
   const { imageUrl, serviceName, price, description, companyName } = service;
 
   return (
-    <div className="service-card">
+    <div className="service">
       <img
         src={service.imageUrl}
         alt={service.serviceName}
         className="service-card-img"
       />
-      <div className="service-card-details">
+      <div className="service-card-details ">
         <h3>{service.serviceName}</h3>
-        <hr />
+        <hr style={{ borderColor: "black", borderWidth: "2px" }} />
         <p>
           <strong>Company Name:</strong> {service.companyName}
         </p>

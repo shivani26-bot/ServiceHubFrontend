@@ -5,6 +5,7 @@ import ServiceCard from "../ServiceCard/ServiceCard";
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import { useEffect } from "react";
 import { useStore } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 export default function Services() {
   const dispatch = useDispatch();
 
@@ -28,11 +29,29 @@ export default function Services() {
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {!loading && !error && companyServices.length === 0 && (
-          <p>No services available</p>
+          <div className="image-container">
+            <img
+              src="/empty.png"
+              alt="No Bookings"
+              className="centered-image"
+            />
+          </div>
         )}
         {companyServices.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </>
   );

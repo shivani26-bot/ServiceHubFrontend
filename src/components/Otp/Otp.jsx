@@ -239,7 +239,7 @@ function Otp() {
                   Time Remaining:
                   <span
                     style={{
-                      marginRight: "80px",
+                      marginRight: "55px",
                     }}
                   >
                     {" "}

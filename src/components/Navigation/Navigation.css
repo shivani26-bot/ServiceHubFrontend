@@ -3,6 +3,7 @@
   color: #fff; /* Set text color for the brand */
   font-size: 2em; /* Set font size for the brand */
   font-weight: bold; /* Set font weight for the brand */
+  width: calc(80% - 90px);
 }
 .brand:hover {
   color: #fff; /* Ensure color remains the same on hover */
@@ -28,9 +29,9 @@
 .brand-images {
   display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 
 .brand-images .logo {
   height: 60px; /* Adjust the height as needed */
-  margin-right: 10px; /* Space between images */
 }

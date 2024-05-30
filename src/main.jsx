@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 // import reportWebVitals from "./reportWebVitals";
 import { reduxStore } from "./App/store";
 import { CookiesProvider } from "react-cookie";
-// import './index.css'
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

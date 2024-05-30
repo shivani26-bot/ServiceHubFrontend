@@ -189,7 +189,7 @@ export default function PostAd() {
       <CompanyNavigationBar />
 
       <div
-        style={{ marginTop: "150px" }}
+        style={{ marginTop: "100px", marginBottom: "100px" }}
         className="d-flex justify-content-center align-items-center "
       >
         <div

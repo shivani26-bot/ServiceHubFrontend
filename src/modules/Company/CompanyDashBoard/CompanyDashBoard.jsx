@@ -150,6 +150,23 @@ export default function CompanyDashBoard() {
                     {booking.bookingStatus === "PENDING" ? (
                       <>
                         <button
+                          style={{
+                            backgroundColor: "green",
+                            color: "white",
+                            border: "none",
+                            padding: "10px 20px",
+                            marginRight: "10px",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            fontSize: "16px",
+                            transition: "background-color 0.3s",
+                          }}
+                          onMouseOver={(e) =>
+                            (e.target.style.backgroundColor = "darkgreen")
+                          }
+                          onMouseOut={(e) =>
+                            (e.target.style.backgroundColor = "green")
+                          }
                           onClick={() =>
                             handleApprove(booking.id, booking.userId)
                           }
@@ -157,6 +174,22 @@ export default function CompanyDashBoard() {
                           Approve
                         </button>
                         <button
+                          style={{
+                            backgroundColor: "red",
+                            color: "white",
+                            border: "none",
+                            padding: "10px 20px",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                            fontSize: "16px",
+                            transition: "background-color 0.3s",
+                          }}
+                          onMouseOver={(e) =>
+                            (e.target.style.backgroundColor = "darkred")
+                          }
+                          onMouseOut={(e) =>
+                            (e.target.style.backgroundColor = "red")
+                          }
                           onClick={() =>
                             handleReject(booking.id, booking.userId)
                           }

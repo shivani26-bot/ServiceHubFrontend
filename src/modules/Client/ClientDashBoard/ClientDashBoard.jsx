@@ -29,7 +29,13 @@ export default function ClientDashBoard() {
       <div className="service-list">
         {status === "loading" && <p>Loading services...</p>}
         {status === "succeeded" && services.length === 0 && (
-          <p>No services available.</p>
+          <div className="image-container">
+            <img
+              src="/empty.png"
+              alt="No Bookings"
+              className="centered-image"
+            />
+          </div>
         )}
         {status === "succeeded" &&
           (searchResults.length > 0

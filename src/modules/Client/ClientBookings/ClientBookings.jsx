@@ -58,6 +58,23 @@ export default function ClientBookings() {
                     {reservation.bookingStatus === "APPROVED" &&
                     isDatePassed(reservation.bookDate) ? (
                       <button
+                        style={{
+                          backgroundColor: "#007bff",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "5px",
+                          padding: "10px 20px",
+                          cursor: "pointer",
+                          fontSize: "16px",
+                          boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.1)",
+                          transition: "background-color 0.3s, box-shadow 0.3s",
+                        }}
+                        onMouseOver={(e) =>
+                          (e.target.style.backgroundColor = "#0056b3")
+                        }
+                        onMouseOut={(e) =>
+                          (e.target.style.backgroundColor = "#007bff")
+                        }
                         onClick={() =>
                           handleReview(
                             reservation.id,

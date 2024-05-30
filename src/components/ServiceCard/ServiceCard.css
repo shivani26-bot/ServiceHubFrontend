@@ -3,10 +3,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* max-width: 680px; */
-  margin-top: 30px;
-  margin-left: 125px;
-  margin-bottom: 30px;
+  /* max-width: 90%; */
+  width: 90%;
+  height: auto;
+  margin: 30px auto;
+  /* margin-left: 125px;
+  margin-right: 125px;
+  margin-bottom: 30px; */
   padding: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -15,9 +18,45 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.service-card-width {
-  width: 1200px;
+/* .service {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 30px;
+  margin-left: 120px;
+
+  margin-bottom: 30px;
+  height: 260px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+} */
+
+.service {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-left: 120px;
+  margin-bottom: 30px;
+  height: 260px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
+
+/* .service-card-width {
+  max-width: 100%;
+} */
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -87,4 +126,29 @@
 
 .service-card-actions .delete-button:hover {
   background-color: #c82333;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
+  .service {
+    margin-left: 60px;
+    margin-right: 60px; /* Add this to maintain symmetry */
+  }
+}
+
+@media (max-width: 768px) {
+  .service {
+    flex-direction: column; /* Stack elements vertically */
+    height: auto; /* Allow height to adjust based on content */
+    margin: 20px; /* Reduce margin for smaller screens */
+    padding: 15px; /* Reduce padding for smaller screens */
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .service {
+    margin: 10px; /* Further reduce margin for very small screens */
+    padding: 10px; /* Further reduce padding */
+  }
 }
