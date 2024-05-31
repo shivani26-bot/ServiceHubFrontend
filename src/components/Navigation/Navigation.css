@@ -11,6 +11,7 @@
 }
 .bg-red {
   background-color: #121481; /* Set background color of the navbar to red */
+  z-index: 3;
 }
 
 .navbar-nav .nav-link {

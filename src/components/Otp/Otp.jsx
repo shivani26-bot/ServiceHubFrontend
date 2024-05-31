@@ -109,6 +109,14 @@ function Otp() {
     }
   };
 
+  const handleKeyDown = (index, event) => {
+    if (event.key === "Backspace" && otp[index] === "") {
+      if (index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -197,6 +205,7 @@ function Otp() {
                       value={digit}
                       className="outline"
                       onChange={(e) => handleOTPChange(index, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(index, e)}
                       style={{
                         width: "40px",
                         height: "40px",
@@ -246,7 +255,7 @@ function Otp() {
                     {minutes < 10 ? `0${minutes}` : minutes}:{" "}
                     {seconds < 10 ? `0${seconds}` : seconds}
                   </span>
-                  <button
+                  <Button
                     href="#"
                     disabled={seconds > 0 || minutes > 0}
                     style={{
@@ -264,7 +273,7 @@ function Otp() {
                     }}
                   >
                     Resend OTP
-                  </button>
+                  </Button>
                   <ToastContainer
                     position="top-right"
                     autoClose={1000}
