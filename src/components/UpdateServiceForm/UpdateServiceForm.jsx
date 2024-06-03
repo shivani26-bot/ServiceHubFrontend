@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap"; // Assuming you're using React Bootstrap
 import PropTypes from "prop-types";
 import { updateServiceDetails } from "../../feature/updateServiceSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,9 +12,9 @@ const UpdateServiceForm = ({ service, onUpdate }) => {
   const [updatedService, setUpdatedService] = useState(service);
   const dispatch = useDispatch();
   const authToken = useSelector((state) => state.auth.authToken);
-  console.log("authToken1", authToken);
+
   const userId = useSelector((state) => state.auth.userId);
-  console.log("userId1", userId);
+
   const notifySuccess = () =>
     toast.success("Service Updated successfully!", {
       position: "top-right",
@@ -31,10 +31,9 @@ const UpdateServiceForm = ({ service, onUpdate }) => {
     const { name, value } = e.target;
     setUpdatedService({ ...updatedService, [name]: value });
   };
-  console.log("updatedService", updatedService);
+
   const handleUpdateClick = async (e) => {
     e.preventDefault();
-    // console.log(service.id, authToken);
 
     try {
       await dispatch(
@@ -93,7 +92,7 @@ const UpdateServiceForm = ({ service, onUpdate }) => {
               onChange={handleChange}
             />
           </Form.Group>
-          {/* Add similar Form.Group components for other fields */}
+
           <Button variant="primary" type="submit" style={{ marginTop: "20px" }}>
             Update
           </Button>

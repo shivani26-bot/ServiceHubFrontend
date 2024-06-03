@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Fetch reservations action
 export const fetchClientBookings = createAsyncThunk(
   "fetchClientBookings",
   async ({ userId, authToken }, { rejectWithValue }) => {
@@ -15,7 +14,7 @@ export const fetchClientBookings = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -39,7 +38,6 @@ const ClientBookingsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchClientBookings.fulfilled, (state, action) => {
-        console.log("bookings", action.payload);
         state.status = "succeeded";
         state.items = action.payload;
       })

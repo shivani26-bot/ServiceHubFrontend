@@ -2,11 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Full viewport height */
+
   margin-top: 30px;
-  /* margin-left: 400px; */
+
 }
 .centered-image {
-  max-width: 80px; /* Maximum width for the image */
-  max-height: 80px; /* Maximum height for the image */
+  max-width: 80px; 
+  max-height: 80px; 
 }

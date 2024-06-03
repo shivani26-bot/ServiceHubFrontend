@@ -1,11 +1,10 @@
-import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { yellow } from "@mui/material/colors";
+
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
 import { useDispatch, useSelector } from "react-redux";
 import { postReview } from "../../feature/reviewSlice";
@@ -39,10 +38,10 @@ export default function PostReview() {
   };
 
   const handleSubmit = () => {
-    console.log(data);
+    // console.log(data);
 
     const { review, rating } = data;
-    console.log(review, rating, bookId, serviceId, userId);
+    // console.log(review, rating, bookId, serviceId, userId);
 
     dispatch(
       postReview({

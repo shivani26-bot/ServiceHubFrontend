@@ -1,6 +1,4 @@
-import React from "react";
-import { Row, Col, Card } from "react-bootstrap";
-
+import PropTypes from "prop-types";
 const ServiceDetail = ({ service }) => {
   const { imageUrl, serviceName, price, description, companyName } = service;
 
@@ -28,4 +26,14 @@ const ServiceDetail = ({ service }) => {
   );
 };
 
+ServiceDetail.propTypes = {
+  service: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    imageUrl: PropTypes.string,
+    serviceName: PropTypes.string.isRequired,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    description: PropTypes.string.isRequired,
+    companyName: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default ServiceDetail;

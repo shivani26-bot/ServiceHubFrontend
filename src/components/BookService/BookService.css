@@ -1,64 +1,3 @@
-/* .book-service-container {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 20px;
-  width: 400px;
-  height: 255px;
-  margin-left: 50px;
-  margin-top: 30px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.date-picker-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.calendar-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 46px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  cursor: pointer;
-}
-
-.calendar-icon svg {
-  font-size: 20px;
-}
-
-.date-picker {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 10px;
-}
-
-.book-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.book-button:hover {
-  background-color: #0056b3;
-} */
 
 .book-service-container {
   border: 1px solid #ccc;
@@ -125,9 +64,9 @@ h2 {
 /* Responsive design for medium screens */
 @media (max-width: 768px) {
   .book-service-container {
-    width: 100%; /* Make container width 100% */
-    margin-left: 0; /* Remove left margin */
-    margin-top: 20px; /* Reduce top margin */
+    width: 100%;
+    margin-left: 0; 
+    margin-top: 20px; 
     margin-right: 10px;
   }
 
@@ -150,34 +89,30 @@ h2 {
   }
 }
 
-/* Responsive design for small screens */
+
 @media (max-width: 480px) {
   .book-service-container {
-    padding: 15px; /* Reduce padding */
-    margin-top: 15px; /* Further reduce top margin */
-    /* Further
-  }
-
-  h2 {
-    font-size: 18px; /* Reduce font size */
-    margin-bottom: 30px; /* Reduce bottom margin */
+    padding: 15px; 
+    margin-top: 15px; 
+   
+    margin-bottom: 30px; 
   }
 
   .calendar-icon {
-    width: 30px; /* Further reduce width */
-    height: 35px; /* Further reduce height */
+    width: 30px; 
+    height: 35px; 
   }
 
   .calendar-icon svg {
-    font-size: 16px; /* Further reduce icon size */
+    font-size: 16px;
   }
 
   .date-picker {
-    padding: 6px; /* Further reduce padding */
+    padding: 6px;
   }
 
   .book-button {
-    padding: 6px; /* Further reduce padding */
-    font-size: 12px; /* Further reduce font size */
+    padding: 6px;
+    font-size: 12px; 
   }
 }

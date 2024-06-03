@@ -1,25 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useEffect } from "react";
+
 import Image from "react-bootstrap/Image";
-import { useRef } from "react";
+
 import "./PostAd.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { postService } from "../../feature/serviceSlice";
 import CompanyNavigationBar from "../Navigation/CompanyNavigationBar";
-import { useSelector } from "react-redux";
-import { useStore } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 export default function PostAd() {
   const navigate = useNavigate();
-  // const [cookies, setCookie] = useCookies(["userCookie"]);
+
   const dispatch = useDispatch();
-  // console.log(loginEmail, loginPassword);
 
   const [data, setData] = useState({
     serviceName: "",
@@ -29,8 +25,6 @@ export default function PostAd() {
     img: null,
   });
 
-  const store = useStore();
-  console.log("State:", store.getState());
   const authToken = useSelector((state) => state.auth.authToken);
   const userId = useSelector((state) => state.auth.userId);
   const [isValidPrice, setIsValidPrice] = useState(false);
@@ -71,22 +65,11 @@ export default function PostAd() {
     });
 
   const imageUpload = (event) => {
-    console.log(event);
-    console.log(event.target);
-    console.log(event.target.value);
-    console.log(event.target.files);
     const file = event.target.files[0];
-    console.log(file);
     const maxSizeInBytes = 1 * 1024 * 1024; // 1 MB
     if (file && file.size > maxSizeInBytes) {
       return;
     }
-    // setImage(file);
-
-    // const { name, value } = event.target;
-
-    // setData({ ...data, [name]: value });
-    // setData({ ...data, img: image });
 
     setImage(file);
     setData({ ...data, img: file });
@@ -127,7 +110,6 @@ export default function PostAd() {
       isValidDescription &&
       data.img !== null
     ) {
-      // console.log("check");
       setValidated(true);
     } else setValidated(false);
   }, [
@@ -139,22 +121,7 @@ export default function PostAd() {
   ]);
 
   const handleSubmit = (event) => {
-    console.log(data);
-    console.log("authtok", authToken);
-    console.log("uid", userId);
     event.preventDefault();
-
-    // dispatch(
-    //   postService({
-    //     userId: userId,
-    //     serviceName: data.serviceName,
-    //     companyName: data.companyName,
-    //     description: data.description,
-    //     price: data.price,
-    //     img: data.img,
-    //     authToken: authToken,
-    //   })
-    // );
 
     dispatch(
       postService({
@@ -180,7 +147,6 @@ export default function PostAd() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle error notification if needed
       });
   };
 

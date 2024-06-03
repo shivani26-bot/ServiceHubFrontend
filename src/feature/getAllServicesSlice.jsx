@@ -7,17 +7,15 @@ export const fetchAllServices = createAsyncThunk(
   "fetchAllServices",
   async ({ authToken }, { rejectWithValue }) => {
     try {
-      // console.log("userid authtoken", userId, authToken);
       const response = await axios.get(
         "http://localhost:9000/api/customer/services",
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
-            // "Content-Type": "application/json",
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(

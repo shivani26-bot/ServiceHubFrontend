@@ -1,8 +1,7 @@
-import React from "react";
 import "./ClientBookings.css";
 import ClientNavigationBar from "../../../components/Navigation/ClientNavigationBar";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { useEffect } from "react";
 import { fetchClientBookings } from "../../../feature/ClientBookingsSlice";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ export default function ClientBookings() {
 
   const handleReview = (bookId, serviceId, userId) => {
     // Handle review logic here
-    console.log("rid", bookId, serviceId, userId);
+    // console.log("rid", bookId, serviceId, userId);
     navigate(`/postReview/${bookId}/${serviceId}/${userId}`);
   };
 

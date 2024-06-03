@@ -1,11 +1,9 @@
-import React from "react";
-import SearchBar from "../../../components/SearchBar/SearchBar";
 import "./CompanyDashBoard.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchServiceProviderBookings } from "../../../feature/serviceProviderBookingsSlice";
 import CompanyNavigationBar from "../../../components/Navigation/CompanyNavigationBar";
-import { useState } from "react";
+
 import { changeBookingStatus } from "../../../feature/bookingStatusSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -50,29 +48,14 @@ export default function CompanyDashBoard() {
   }, [dispatch, authToken, serviceProviderId]);
 
   useEffect(() => {
-    console.log(status);
+    // console.log(status);
     if (status === "succeeded") {
       setLocalBookings(bookings);
     }
-    console.log(bookings);
+    // console.log(bookings);
   }, [status, bookings]);
 
   const handleApprove = (id, customerId) => {
-    // console.log("Clicked booking ID:", id);
-    // console.log("Previous local bookings:", localBookings);
-    // setLocalBookings((prevBookings) => {
-    //   const updatedBookings = prevBookings.map((booking) => {
-    //     console.log("Processing booking ID:", booking.id);
-    //     if (booking.id === id) {
-    //       console.log("Updating booking ID:", booking.id);
-    //       return { ...booking, bookingStatus: "APPROVED" };
-    //     }
-    //     return booking;
-    //   });
-    //   console.log("Updated bookings:", updatedBookings);
-    //   return updatedBookings;
-    // });
-
     dispatch(
       changeBookingStatus({
         bookingId: id,

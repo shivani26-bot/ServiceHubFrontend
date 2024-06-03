@@ -9,7 +9,7 @@ export const postReview = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      console.log(review, rating, serviceId, bookId, userId);
+      // console.log(review, rating, serviceId, bookId, userId);
       const response = await axios.post(
         "http://localhost:9000/api/customer/review",
         {
@@ -25,7 +25,7 @@ export const postReview = createAsyncThunk(
           },
         }
       );
-      console.log("response", response.data);
+      // console.log("response", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

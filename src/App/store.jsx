@@ -17,7 +17,7 @@ import reviewSlice from "../feature/reviewSlice";
 import pendingRegistrationSlice from "../feature/pendingRegistrationSlice";
 export const reduxStore = configureStore({
   reducer: {
-    display: displaySlice, //companyregister data
+    display: displaySlice,
     api: apiSlice,
     auth: authSlice,
     services: serviceSlice,

@@ -3,20 +3,15 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Login.css";
 import { login } from "../../feature/displaySlice";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { postLoginData } from "../../feature/apiSlice";
-// import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { postLogin } from "../../feature/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../Navigation/Navigation";
-import { useStore } from "react-redux";
-function Login() {
-  // const [cookies, setCookie] = useCookies(["userCookie"]);
 
+function Login() {
   const UserRole = {
     CUSTOMER: "CUSTOMER",
     SERVICEPROVIDER: "SERVICEPROVIDER",
@@ -32,6 +27,7 @@ function Login() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      className: "custom-toast-container",
     });
   const notifyFailure = (message) =>
     toast.error(message, {
@@ -43,13 +39,13 @@ function Login() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      className: "custom-toast-container",
     });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { authToken, userId, userData } = useSelector((state) => state.auth);
-  // const { email, password } = useSelector((state) => state.auth);
 
   const [data, setData] = useState({
     username: "",
@@ -61,9 +57,7 @@ function Login() {
     const { name, value } = event.target;
     setData({ ...data, [name]: value });
   };
-  // console.log("authToken1", authToken);
-  // console.log("user1", userId);
-  // console.log("data", userData);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(
@@ -103,18 +97,13 @@ function Login() {
     }
   }, [authToken, userId, userData, navigate]);
 
-  const store = useStore();
-  console.log("State:", store.getState());
   return (
     <>
       <Navigation />
       <div className="gradient-background">
         <div className="blur-overlay"></div>
 
-        <div
-          // style={{ marginTop: "150px" }}
-          className="content-container d-flex justify-content-center align-items-center "
-        >
+        <div className="content-container d-flex justify-content-center align-items-center ">
           <div className="form-container">
             <div className="login-title">
               <h2 className="font-weight-bold">Login</h2>
@@ -167,78 +156,12 @@ function Login() {
               draggable
               pauseOnHover
               theme="colored"
+              className="custom-toast-container"
             />
           </div>
         </div>
       </div>
     </>
-
-    // <>
-    //   <Navigation />
-    //   <div className="bkg centered-container">
-    //     <div className="form-container">
-    //       <div className="login-title">
-    //         <h2 className="font-weight-bold">Login</h2>
-    //       </div>
-
-    //       <Form onSubmit={handleSubmit}>
-    //         <div className="mb-3 outline">
-    //           <FloatingLabel controlId="floatingInput" label="Email address">
-    //             <Form.Control
-    //               name="username"
-    //               value={data.username}
-    //               type="email"
-    //               placeholder="name@example.com"
-    //               onChange={handleChange}
-    //             />
-    //           </FloatingLabel>
-    //         </div>
-    //         <div className="mb-3 outline">
-    //           <FloatingLabel controlId="floatingPassword" label="Password">
-    //             <Form.Control
-    //               name="password"
-    //               value={data.password}
-    //               type="password"
-    //               placeholder="Password"
-    //               onChange={handleChange}
-    //             />
-    //           </FloatingLabel>
-    //         </div>
-    //         {/* <Form.Check
-    //           type={"checkbox"}
-    //           id={`default-${"checkbox"}`}
-    //           label={`Remember me`}
-    //           className="mb-3"
-    //         /> */}
-    //         <Button className="custom-button mb-2" type="submit">
-    //           Login
-    //         </Button>
-    //       </Form>
-
-    //       <p>
-    //         Or{" "}
-    //         <a
-    //           href="/register"
-    //           className="register-link font-weight-bold fs-6 mb-0"
-    //         >
-    //           register now!
-    //         </a>
-    //       </p>
-    //       <ToastContainer
-    //         position="top-right"
-    //         autoClose={1000}
-    //         hideProgressBar={false}
-    //         newestOnTop={false}
-    //         closeOnClick={false}
-    //         rtl={false}
-    //         pauseOnFocusLoss
-    //         draggable
-    //         pauseOnHover
-    //         theme="colored"
-    //       />
-    //     </div>
-    //   </div>
-    // </>
   );
 }
 

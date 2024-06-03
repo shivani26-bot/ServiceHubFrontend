@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Rating from "@mui/material/Rating";

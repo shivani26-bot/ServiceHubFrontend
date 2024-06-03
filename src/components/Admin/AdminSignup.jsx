@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-// import "./ClientSignup.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -38,6 +36,7 @@ function AdminSignup() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      className: "custom-toast-container",
     });
 
   const notifyFailure = (msg) =>
@@ -50,6 +49,7 @@ function AdminSignup() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      className: "custom-toast-container",
     });
 
   useEffect(() => {
@@ -129,173 +129,174 @@ function AdminSignup() {
   return (
     <>
       <AdminMainNavigation />
-      <div
-        style={{ marginTop: "100px", marginBottom: "100px" }}
-        className="d-flex justify-content-center align-items-center "
-      >
+      <div className="gradient-background">
+        <div className="blur-overlay"></div>
         <div
-          style={{
-            width: "500px",
-            padding: "20px",
-            border: "1px solid #121481",
-            borderRadius: "5px",
-            backgroundColor: "#f9f9f9",
-          }}
+          style={{ marginTop: "40px" }}
+          className="content-container d-flex justify-content-center align-items-center "
         >
-          <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-            Admin Signup
-          </h2>
-          {/* noValidate :Allows Custom Form Validation. form data should not be validated by the browser when submitted.  disables the default HTML form validation behavior provided by the browser. */}
-          <Form noValidate onSubmit={handleSubmit}>
-            <Form.Group controlId="formName">
-              <Form.Control
-                required
-                name="firstname"
-                type="text"
-                value={data.firstname}
-                className="outline"
-                onChange={handleChange}
-                placeholder="Name"
-                isInvalid={!isValidName && data.firstname !== ""}
-                isValid={isValidName}
-              />
+          <div
+            className="form-container"
+            style={{
+              width: "500px",
+            }}
+          >
+            <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+              Admin Signup
+            </h2>
+            {/* noValidate :Allows Custom Form Validation. form data should not be validated by the browser when submitted.  disables the default HTML form validation behavior provided by the browser. */}
+            <Form noValidate onSubmit={handleSubmit}>
+              <Form.Group controlId="formName">
+                <Form.Control
+                  required
+                  name="firstname"
+                  type="text"
+                  value={data.firstname}
+                  className="outline"
+                  onChange={handleChange}
+                  placeholder="Name"
+                  isInvalid={!isValidName && data.firstname !== ""}
+                  isValid={isValidName}
+                />
 
-              {isValidName && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              {!isValidName && data.firstname !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Enter a Valid Company Name!
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
+                {isValidName && (
+                  <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+                )}
+                {!isValidName && data.firstname !== "" && (
+                  <Form.Control.Feedback type="invalid" className="mb-1">
+                    Enter a Valid Company Name!
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
 
-            <Form.Group controlId="formEmail">
-              <Form.Control
-                required
-                name="email"
-                type="email"
-                className="outline "
-                placeholder="Email"
-                value={data.email}
-                onChange={handleChange}
-                isInvalid={!isValidEmail && data.email !== ""}
-                isValid={isValidEmail}
-              />
-              {isValidEmail && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              {!isValidEmail && data.email !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Enter a valid email!
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
+              <Form.Group controlId="formEmail">
+                <Form.Control
+                  required
+                  name="email"
+                  type="email"
+                  className="outline "
+                  placeholder="Email"
+                  value={data.email}
+                  onChange={handleChange}
+                  isInvalid={!isValidEmail && data.email !== ""}
+                  isValid={isValidEmail}
+                />
+                {isValidEmail && (
+                  <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+                )}
+                {!isValidEmail && data.email !== "" && (
+                  <Form.Control.Feedback type="invalid" className="mb-1">
+                    Enter a valid email!
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
 
-            <Form.Group controlId="validationCustomPassword">
-              <Form.Control
-                required
-                name="password"
-                type="password"
-                className="outline"
-                placeholder="Password"
-                value={data.password}
-                onChange={handleChange}
-                isInvalid={!isValidPassword && data.password !== ""}
-                isValid={isValidPassword}
-              />
-              {isValidPassword && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              {!isValidPassword && data.password !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Password must be 8 characters!
-                  <br /> Only !@#$_ special characters allowed!
-                  <br /> Combaination of !@#$_ special characters is not
-                  allowed!
-                </Form.Control.Feedback>
-              )}
-              {/* <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+              <Form.Group controlId="validationCustomPassword">
+                <Form.Control
+                  required
+                  name="password"
+                  type="password"
+                  className="outline"
+                  placeholder="Password"
+                  value={data.password}
+                  onChange={handleChange}
+                  isInvalid={!isValidPassword && data.password !== ""}
+                  isValid={isValidPassword}
+                />
+                {isValidPassword && (
+                  <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+                )}
+                {!isValidPassword && data.password !== "" && (
+                  <Form.Control.Feedback type="invalid" className="mb-1">
+                    Password must be 8 characters!
+                    <br /> Only !@#$_ special characters allowed!
+                    <br /> Combaination of !@#$_ special characters is not
+                    allowed!
+                  </Form.Control.Feedback>
+                )}
+                {/* <Form.Control.Feedback type="valid"></Form.Control.Feedback>
               <Form.Control.Feedback type="invalid"></Form.Control.Feedback> */}
-            </Form.Group>
+              </Form.Group>
 
-            <Form.Group controlId="validationCustomConfirmPassword">
-              <Form.Control
-                required
-                name="confirmPassword"
-                type="password"
-                className="outline"
-                placeholder="Confirm Password"
-                value={data.confirmPassword}
-                onChange={handleChange}
-                isInvalid={!isPasswordMatch && data.confirmPassword !== ""}
-                isValid={isPasswordMatch}
-              />
-              {isPasswordMatch && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
+              <Form.Group controlId="validationCustomConfirmPassword">
+                <Form.Control
+                  required
+                  name="confirmPassword"
+                  type="password"
+                  className="outline"
+                  placeholder="Confirm Password"
+                  value={data.confirmPassword}
+                  onChange={handleChange}
+                  isInvalid={!isPasswordMatch && data.confirmPassword !== ""}
+                  isValid={isPasswordMatch}
+                />
+                {isPasswordMatch && (
+                  <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+                )}
 
-              {!isPasswordMatch && data.confirmPassword !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Password doesn't match!
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
+                {!isPasswordMatch && data.confirmPassword !== "" && (
+                  <Form.Control.Feedback type="invalid" className="mb-1">
+                    Password doesn't match!
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
 
-            <Form.Group a controlId="formTelephone">
-              <Form.Control
-                required
-                name="phone"
-                type="tel"
-                className="outline"
-                placeholder="Telephone"
-                value={data.phone}
-                onChange={handleChange}
-                isInvalid={!isValidTelephone && data.phone !== ""}
-                isValid={isValidTelephone}
-              />
-              {isValidTelephone && (
-                <Form.Control.Feedback type="valid"></Form.Control.Feedback>
-              )}
-              {!isValidTelephone && data.phone !== "" && (
-                <Form.Control.Feedback type="invalid" className="mb-1">
-                  Enter a Valid Phone Number!
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
+              <Form.Group a controlId="formTelephone">
+                <Form.Control
+                  required
+                  name="phone"
+                  type="tel"
+                  className="outline"
+                  placeholder="Telephone"
+                  value={data.phone}
+                  onChange={handleChange}
+                  isInvalid={!isValidTelephone && data.phone !== ""}
+                  isValid={isValidTelephone}
+                />
+                {isValidTelephone && (
+                  <Form.Control.Feedback type="valid"></Form.Control.Feedback>
+                )}
+                {!isValidTelephone && data.phone !== "" && (
+                  <Form.Control.Feedback type="invalid" className="mb-1">
+                    Enter a Valid Phone Number!
+                  </Form.Control.Feedback>
+                )}
+              </Form.Group>
 
-            <Button
-              style={{
-                width: "250px",
-                backgroundColor: validated ? "green" : "red",
-                color: "white",
-                margin: "15px auto 15px auto",
-              }}
-              disabled={!validated}
-              className="d-flex justify-content-center align-items-center"
-              onClick={handleSubmit}
-            >
-              Register
-            </Button>
-          </Form>
-          <p className="d-flex justify-content-center align-items-center">
-            Already have an account?
-            <a href="/adminLogin" className="register-link font-weight-bold ">
-              login now!
-            </a>
-          </p>
-          <ToastContainer
-            position="top-right"
-            autoClose={1000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
+              <Button
+                style={{
+                  width: "250px",
+                  backgroundColor: validated ? "green" : "red",
+                  color: "white",
+                  margin: "15px auto 15px auto",
+                }}
+                disabled={!validated}
+                className="d-flex justify-content-center align-items-center"
+                onClick={handleSubmit}
+              >
+                Register
+              </Button>
+            </Form>
+            <p className="d-flex justify-content-center align-items-center">
+              Already have an account?
+              <a href="/adminLogin" className="register-link font-weight-bold ">
+                login now!
+              </a>
+            </p>
+            <ToastContainer
+              position="top-right"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+              className="custom-toast-container"
+            />
+          </div>
         </div>
       </div>
     </>

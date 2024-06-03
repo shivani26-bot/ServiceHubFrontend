@@ -1,24 +1,26 @@
 import { useEffect } from "react";
-import React from "react";
+
 import BookService from "../BookService/BookService";
 import ServiceDetail from "../ServiceCard/ServiceDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchServiceDetails } from "../../feature/serviceDetailByIdSlice";
+import {
+  fetchServiceDetails,
+  resetStatus,
+} from "../../feature/serviceDetailByIdSlice";
 import { Row, Col } from "react-bootstrap";
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
-import { resetStatus } from "../../feature/serviceDetailByIdSlice";
 
 import Review from "../PostReview/Review";
 export default function ViewService() {
   const { serviceId } = useParams();
-  console.log("serviceId", serviceId);
+
   const authToken = useSelector((state) => state.auth.authToken);
-  console.log(authToken);
+
   const dispatch = useDispatch();
   const status = useSelector((state) => state.serviceDetail.status);
   const serviceDto = useSelector((state) => state.serviceDetail.serviceDto);
-  console.log("serviceauth", authToken, serviceDto);
+
   const reviewDtoList = useSelector(
     (state) => state.serviceDetail.reviewDtoList
   );
@@ -53,9 +55,6 @@ export default function ViewService() {
                 {serviceDto && <BookService serviceId={serviceDto.id} />}
               </Col>
             </Row>
-            {/* <Row>
-              <Review serviceId={reviewDto} />
-            </Row> */}
 
             {reviewDtoList && reviewDtoList.length > 0 ? (
               reviewDtoList.map((reviewDto, index) => (

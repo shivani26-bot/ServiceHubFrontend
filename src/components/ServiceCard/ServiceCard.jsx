@@ -1,23 +1,21 @@
-import React from "react";
 import "./ServiceCard.css"; // Assuming you have some CSS for styling
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteService } from "../../feature/deleteServiceSlice";
-import { useSelector } from "react-redux";
+
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import UpdateServiceForm from "../UpdateServiceForm/UpdateServiceForm";
-// import { fetchServiceDetails } from "../../feature/updateServiceSlice";
-import { ToastContainer, toast } from "react-toastify";
+
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const ServiceCard = ({ service }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false); // to show the modal form
   const { id, serviceName, price, description, imageUrl } = service;
-  console.log("service", service);
-  console.log("id", id);
+
   const authToken = useSelector((state) => state.auth.authToken);
-  console.log("authToken", authToken);
+
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   const notifySuccess = () =>

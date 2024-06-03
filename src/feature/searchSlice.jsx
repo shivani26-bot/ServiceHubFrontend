@@ -1,4 +1,3 @@
-// searchSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -6,14 +5,12 @@ export const searchServiceByName = createAsyncThunk(
   "searchServiceByName",
   async ({ name, authToken }, { rejectWithValue }) => {
     try {
-      console.log(name, authToken);
+      // console.log(name, authToken);
       const response = await axios.get(
         `http://localhost:9000/api/customer/search?name=${name}`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
-            "Content-Type": "*/*",
-            // Accept: "*/*",
           },
         }
       );
@@ -38,7 +35,7 @@ const searchSlice = createSlice({
         state.status = "loading";
       })
       .addCase(searchServiceByName.fulfilled, (state, action) => {
-        console.log("results", action.payload);
+        // console.log("results", action.payload);
         state.status = "succeeded";
         state.results = action.payload;
       })

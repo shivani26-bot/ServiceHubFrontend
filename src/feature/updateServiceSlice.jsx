@@ -1,4 +1,3 @@
-// serviceDetailsSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
@@ -7,7 +6,6 @@ export const updateServiceDetails = createAsyncThunk(
   "updateServiceDetails",
   async ({ serviceId, authToken, updatedServiceData }, { rejectWithValue }) => {
     try {
-      console.log("sidauth", serviceId, authToken);
       const formData = new FormData();
       Object.entries(updatedServiceData).forEach(([key, value]) => {
         if (key !== "img" && key !== "imageUrl") {
@@ -15,10 +13,9 @@ export const updateServiceDetails = createAsyncThunk(
         }
       });
 
-      // Logging FormData to verify its contents
-      for (let pair of formData.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      // for (let pair of formData.entries()) {
+      //   console.log(pair[0], pair[1]);
+      // }
 
       const response = await axios.put(
         `http://localhost:9000/api/serviceprovider/serviceUpdate?serviceId=${serviceId}`,
@@ -53,7 +50,6 @@ const updateServiceSlice = createSlice({
         state.error = null;
       })
       .addCase(updateServiceDetails.fulfilled, (state, action) => {
-        console.log("action", action.payload);
         state.loading = false;
         state.service = action.payload;
       })

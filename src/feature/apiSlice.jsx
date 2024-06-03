@@ -12,7 +12,6 @@ export const postAdminData = createAsyncThunk(
     });
     // return response.json();
     const text = await response.text();
-    console.log("Response from backend:", text); // Log the response payload
 
     return text;
   }
@@ -33,7 +32,6 @@ export const postCompanyData = createAsyncThunk(
     );
     // return response.json();
     const text = await response.text();
-    console.log("Response from backend:", text); // Log the response payload
 
     return text;
   }
@@ -56,7 +54,6 @@ export const postCustomerData = createAsyncThunk(
 export const verifyOTP = createAsyncThunk(
   "verifyOTP",
   async ({ email, otp }) => {
-    console.log(email, otp);
     const response = await fetch(
       `http://localhost:9000/verify-account?email=${email}&otp=${otp}`,
       {
@@ -68,13 +65,7 @@ export const verifyOTP = createAsyncThunk(
       }
     );
 
-    // return response.json();
-    // const data = await response.json();
-    // const jsonString = JSON.stringify(data);
-    // console.log("Response from backend:", jsonString); // Log the response payload
-    // return jsonString;
     const text = await response.text();
-    console.log("Response from backend:", text); // Log the response payload
 
     return text;
   }
@@ -83,7 +74,6 @@ export const verifyOTP = createAsyncThunk(
 export const verifyServiceProviderOTP = createAsyncThunk(
   "verifyServiceProviderOTP",
   async ({ email, otp }) => {
-    console.log(email, otp);
     const response = await fetch(
       `http://localhost:9000/verify/serviceprovider?email=${email}&otp=${otp}`,
       {
@@ -95,7 +85,6 @@ export const verifyServiceProviderOTP = createAsyncThunk(
       }
     );
     const text = await response.text();
-    console.log("Response from backend:", text); // Log the response payload
 
     return text;
   }
@@ -111,7 +100,6 @@ export const regenerateOTP = createAsyncThunk(
         headers: {
           "Content-type": "application/json",
         },
-        // body: JSON.stringify(email),
       }
     ).catch((error) => console.error(error));
     return response.json();
@@ -125,20 +113,17 @@ const apiSlice = createSlice({
     data: null,
     isError: false,
   },
-  // to handle Pending, succesfull and fail case
+
   extraReducers: (builder) => {
-    builder.addCase(verifyOTP.pending, (state, action) => {
-      console.log("", action.payload);
+    builder.addCase(verifyOTP.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(verifyOTP.fulfilled, (state, action) => {
-      console.log("fullfilled", action.payload);
       state.isLoading = false;
       state.data = action.payload;
       state.isError = false;
     });
-    builder.addCase(verifyOTP.rejected, (state, action) => {
-      console.log("Error", action.payload);
+    builder.addCase(verifyOTP.rejected, (state) => {
       state.isError = true;
     });
   },

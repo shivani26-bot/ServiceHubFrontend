@@ -1,17 +1,16 @@
-/* Navigation.css */
 .brand {
-  color: #fff; /* Set text color for the brand */
-  font-size: 2em; /* Set font size for the brand */
-  font-weight: bold; /* Set font weight for the brand */
+  color: #fff;
+  font-size: 2em;
+  font-weight: bold;
   width: calc(80% - 90px);
 }
 .brand:hover {
-  color: #fff; /* Ensure color remains the same on hover */
-  cursor: default; /* Set default cursor on hover */
+  color: #fff;
+  cursor: default;
 }
 .bg-red {
-  background-color: #121481; /* Set background color of the navbar to red */
-  z-index: 3;
+  background-color: #121481;
+  z-index: 2;
 }
 
 .navbar-nav .nav-link {
@@ -34,5 +33,5 @@
 }
 
 .brand-images .logo {
-  height: 60px; /* Adjust the height as needed */
+  height: 60px;
 }

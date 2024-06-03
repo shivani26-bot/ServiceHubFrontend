@@ -1,11 +1,10 @@
-// src/redux/serviceSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchServiceDetails = createAsyncThunk(
   "fetchServiceDetails",
   async ({ serviceId, authToken }) => {
-    console.log("idauth", serviceId, authToken);
+    // console.log("idauth", serviceId, authToken);
     const response = await axios.get(
       `http://localhost:9000/api/customer/service?serviceId=${serviceId}`,
       {
@@ -14,7 +13,7 @@ export const fetchServiceDetails = createAsyncThunk(
         },
       }
     );
-    console.log("responsedata", response.data);
+    // console.log("responsedata", response.data);
     return response.data;
   }
 );
@@ -39,8 +38,8 @@ const serviceDetailByIdSlice = createSlice({
       })
       .addCase(fetchServiceDetails.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("serviceDto", action.payload.serviceDto);
-        console.log("reviewDto", action.payload.reviewDtoList);
+        // console.log("serviceDto", action.payload.serviceDto);
+        // console.log("reviewDto", action.payload.reviewDtoList);
         state.serviceDto = action.payload.serviceDto;
         state.reviewDtoList = action.payload.reviewDtoList;
       })

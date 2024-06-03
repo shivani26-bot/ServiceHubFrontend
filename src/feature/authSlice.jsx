@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { useCookies } from "react-cookie";
-
-// To store the returned auth token in a cookie and set the expiration time for that cookie, you'll need to move the logic for setting the cookie outside of the Redux action. This is because you cannot use React hooks (such as useCookies) directly in non-component functions or Redux actions. Instead, you should handle setting the cookie in a component where you dispatch the action.
 
 export const postLogin = createAsyncThunk(
   "postLogin",
@@ -19,16 +16,12 @@ export const postLogin = createAsyncThunk(
       const authTokenString = "{" + response.data.split("}{")[1];
       const authTokenData = JSON.parse(authTokenString); // Assuming token is returned in the response
       const authToken = authTokenData["Authorization Token is"];
-      console.log("auth", authToken);
 
       const userIdString = response.data.split("}{")[0] + "}";
       const userData = JSON.parse(userIdString); //{role: 'SERVICEPROVIDER', userId: 3
       const userId = userData.userId;
-      console.log("user", userId);
-      console.log("response", response.data);
 
       return { authToken, userId, userData }; // Return auth token, user ID, and full user data
-      // return response.data;
     } catch (error) {
       return rejectWithValue(
         error.response ? error.response.data : "Network Error"
@@ -60,7 +53,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(postLogin.fulfilled, (state, action) => {
-        console.log("fullfilled", action.payload);
         state.loading = false;
         state.authToken = action.payload.authToken;
         state.userId = action.payload.userId;
@@ -69,7 +61,7 @@ const authSlice = createSlice({
       })
       .addCase(postLogin.rejected, (state, action) => {
         state.loading = false;
-        // state.user = null;
+
         state.authToken = null;
         state.userId = null;
         state.userData = null;

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Async thunk to fetch bookings for a service provider
 export const fetchServiceProviderBookings = createAsyncThunk(
   "fetchServiceProviderBookings",
   async ({ serviceproviderId, authToken }, { rejectWithValue }) => {
@@ -14,7 +13,7 @@ export const fetchServiceProviderBookings = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(

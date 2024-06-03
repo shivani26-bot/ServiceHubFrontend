@@ -1,9 +1,11 @@
-import React from "react";
-import { fetchPendingRegistrations } from "../../feature/pendingRegistrationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { approveRegistration } from "../../feature/pendingRegistrationSlice";
-import { rejectRegistration } from "../../feature/pendingRegistrationSlice";
+import {
+  approveRegistration,
+  rejectRegistration,
+  fetchPendingRegistrations,
+} from "../../feature/pendingRegistrationSlice";
+
 import AdminNavigation from "./AdminNavigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,11 +17,9 @@ export default function AdminDashBoard() {
   const pendingRegistration = useSelector(
     (state) => state.pendingRegistration.items
   );
-  console.log(pendingRegistration);
+
   const status = useSelector((state) => state.pendingRegistration.status);
   const error = useSelector((state) => state.pendingRegistration.error);
-  // Assuming userId is the service provider ID
-  console.log("adminauth", authToken);
 
   const notifySuccess = () =>
     toast.success("Approved Successfully", {
@@ -77,7 +77,6 @@ export default function AdminDashBoard() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle error notification if needed
       });
   };
 
@@ -87,7 +86,7 @@ export default function AdminDashBoard() {
         if (
           response.payload === "Invalid user or registration already rejected."
         ) {
-          notifyRejection(response.payload);
+          notifyFailure(response.payload);
         } else {
           notifyRejection();
           dispatch(fetchPendingRegistrations(authToken));
@@ -95,7 +94,6 @@ export default function AdminDashBoard() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        // Handle error notification if needed
       });
   };
 

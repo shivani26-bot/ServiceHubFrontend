@@ -1,9 +1,8 @@
-import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { searchServiceByName } from "../../feature/searchSlice";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
