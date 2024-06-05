@@ -47,7 +47,10 @@ export const postCustomerData = createAsyncThunk(
       },
       body: JSON.stringify(customerData),
     });
-    return response.json();
+
+    const text = await response.text();
+
+    return text;
   }
 );
 
