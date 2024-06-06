@@ -19,7 +19,9 @@ export default function BookService() {
   const userId = useSelector((state) => state.auth.userId);
   // console.log("uidauthsid", userId, authToken, serviceId);
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    const normalizedDate = new Date(date.setHours(0, 0, 0, 0));
+    setSelectedDate(normalizedDate);
+    // setSelectedDate(date);
   };
   const notifySuccess = () =>
     toast.success(
