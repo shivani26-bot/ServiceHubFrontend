@@ -19,9 +19,14 @@ export default function BookService() {
   const userId = useSelector((state) => state.auth.userId);
   // console.log("uidauthsid", userId, authToken, serviceId);
   const handleDateChange = (date) => {
-    const normalizedDate = new Date(date.setHours(0, 0, 0, 0));
+    const normalizedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    // console.log("Normalized date", normalizedDate.toLocaleDateString("en-CA"));
     setSelectedDate(normalizedDate);
-    // setSelectedDate(date);
   };
   const notifySuccess = () =>
     toast.success(
@@ -39,13 +44,11 @@ export default function BookService() {
     );
 
   const handleBookClick = () => {
-    // Handle booking action here
-    // console.log("Book button clicked");
     if (selectedDate) {
       const bookingData = {
-        serviceId: parseInt(serviceId, 10), // Ensure serviceId is an integer
+        serviceId: parseInt(serviceId, 10),
         userId: userId,
-        bookDate: selectedDate.toISOString(), // Convert date to ISO string
+        bookDate: selectedDate.toLocaleDateString("en-CA"),
       };
       dispatch(addBooking({ bookingData, authToken }))
         .unwrap()
@@ -80,7 +83,7 @@ export default function BookService() {
           onChange={handleDateChange}
           className="date-picker"
           placeholderText="Select Date"
-          dateFormat="dd/MM/yyyy"
+          dateFormat="yyyy/MM/dd"
           minDate={today}
         />
       </div>
