@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
+import { API_BASE_URL } from "../constant";
 
 export const postReview = createAsyncThunk(
   "postReview",
@@ -11,7 +12,7 @@ export const postReview = createAsyncThunk(
     try {
       // console.log(review, rating, serviceId, bookId, userId);
       const response = await axios.post(
-        "http://localhost:9000/api/customer/review",
+        `${API_BASE_URL}/api/customer/review`,
         {
           review,
           rating,

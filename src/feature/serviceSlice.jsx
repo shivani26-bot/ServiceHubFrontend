@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 export const postService = createAsyncThunk(
   "postService",
@@ -18,7 +19,7 @@ export const postService = createAsyncThunk(
 
       // console.log("form", formData);
       const response = await axios.post(
-        `http://localhost:9000/api/serviceprovider/service?userId=${userId}`,
+        `${API_BASE_URL}/api/serviceprovider/service?userId=${userId}`,
         formData,
         {
           headers: {

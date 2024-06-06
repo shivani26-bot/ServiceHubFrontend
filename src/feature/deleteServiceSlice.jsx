@@ -1,13 +1,14 @@
 // src/features/services/deleteServiceSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 export const deleteService = createAsyncThunk(
   "deleteService",
   async ({ serviceId, authToken }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `http://localhost:9000/api/serviceprovider/delete-service?serviceId=${serviceId}`,
+        `${API_BASE_URL}/api/serviceprovider/delete-service?serviceId=${serviceId}`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,

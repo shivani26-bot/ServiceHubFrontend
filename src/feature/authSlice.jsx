@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 export const postLogin = createAsyncThunk(
   "postLogin",
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:9000/authenticate/login",
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/authenticate/login`, {
+        username,
+        password,
+      });
 
       const authTokenString = "{" + response.data.split("}{")[1];
       const authTokenData = JSON.parse(authTokenString); // Assuming token is returned in the response

@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { API_BASE_URL } from "../constant";
 
 export const postAdminData = createAsyncThunk(
   "postAdminData",
   async (adminData) => {
-    const response = await fetch("http://localhost:9000/admin/register", {
+    const response = await fetch(`${API_BASE_URL}/admin/register`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -20,16 +21,13 @@ export const postAdminData = createAsyncThunk(
 export const postCompanyData = createAsyncThunk(
   "postCompanyData",
   async (companyData) => {
-    const response = await fetch(
-      "http://localhost:9000/service-provider/sign-up",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(companyData),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/service-provider/sign-up`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(companyData),
+    });
     // return response.json();
     const text = await response.text();
 
@@ -40,7 +38,7 @@ export const postCompanyData = createAsyncThunk(
 export const postCustomerData = createAsyncThunk(
   "postCustomerData",
   async (customerData) => {
-    const response = await fetch("http://localhost:9000/customer/sign-up", {
+    const response = await fetch(`${API_BASE_URL}/customer/sign-up`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -58,7 +56,7 @@ export const verifyOTP = createAsyncThunk(
   "verifyOTP",
   async ({ email, otp }) => {
     const response = await fetch(
-      `http://localhost:9000/verify-account?email=${email}&otp=${otp}`,
+      `${API_BASE_URL}/verify-account?email=${email}&otp=${otp}`,
       {
         method: "POST",
         headers: {
@@ -78,7 +76,7 @@ export const verifyServiceProviderOTP = createAsyncThunk(
   "verifyServiceProviderOTP",
   async ({ email, otp }) => {
     const response = await fetch(
-      `http://localhost:9000/verify/serviceprovider?email=${email}&otp=${otp}`,
+      `${API_BASE_URL}/verify/serviceprovider?email=${email}&otp=${otp}`,
       {
         method: "PUT",
         headers: {
@@ -97,7 +95,7 @@ export const regenerateOTP = createAsyncThunk(
   "regenerateOTP",
   async (email) => {
     const response = await fetch(
-      `http://localhost:9000/regenerate-otp?email=${email}`,
+      `${API_BASE_URL}/regenerate-otp?email=${email}`,
       {
         method: "POST",
         headers: {

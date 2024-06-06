@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 // Async thunk for fetching pending registrations
 export const fetchPendingRegistrations = createAsyncThunk(
@@ -7,7 +8,7 @@ export const fetchPendingRegistrations = createAsyncThunk(
   async (authToken, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        "http://localhost:9000/admin/pending-registrations",
+        `${API_BASE_URL}/admin/pending-registrations`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
@@ -26,7 +27,7 @@ export const approveRegistration = createAsyncThunk(
   async ({ userId, authToken }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:9000/admin/approve-registration?userId=${userId}`,
+        `${API_BASE_URL}/admin/approve-registration?userId=${userId}`,
         {},
         {
           headers: {
@@ -47,7 +48,7 @@ export const rejectRegistration = createAsyncThunk(
   async ({ userId, authToken }, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `http://localhost:9000/admin/reject-registration?userId=${userId}`,
+        `${API_BASE_URL}/admin/reject-registration?userId=${userId}`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,

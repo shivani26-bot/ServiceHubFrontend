@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 export const updateServiceDetails = createAsyncThunk(
   "updateServiceDetails",
@@ -18,7 +19,7 @@ export const updateServiceDetails = createAsyncThunk(
       // }
 
       const response = await axios.put(
-        `http://localhost:9000/api/serviceprovider/serviceUpdate?serviceId=${serviceId}`,
+        `${API_BASE_URL}/api/serviceprovider/serviceUpdate?serviceId=${serviceId}`,
         formData,
         {
           headers: {

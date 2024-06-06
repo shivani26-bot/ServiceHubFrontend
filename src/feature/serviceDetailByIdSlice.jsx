@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "../constant";
 
 export const fetchServiceDetails = createAsyncThunk(
   "fetchServiceDetails",
   async ({ serviceId, authToken }) => {
     // console.log("idauth", serviceId, authToken);
     const response = await axios.get(
-      `http://localhost:9000/api/customer/service?serviceId=${serviceId}`,
+      `${API_BASE_URL}/api/customer/service?serviceId=${serviceId}`,
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
