@@ -15,7 +15,9 @@ import Review from "../PostReview/Review";
 export default function ViewService() {
   const { serviceId } = useParams();
 
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
+  // const userId = sessionStorage.getItem("userId");
 
   const dispatch = useDispatch();
   const status = useSelector((state) => state.serviceDetail.status);

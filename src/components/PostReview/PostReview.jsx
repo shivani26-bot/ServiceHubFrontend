@@ -16,7 +16,9 @@ export default function PostReview() {
   const { bookId, serviceId, userId } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState({ review: "", rating: null });
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
+  // const userId = sessionStorage.getItem("userId");
   const notifySuccess = () =>
     toast.success("Thank you for sharing your feedback with us!", {
       position: "top-right",

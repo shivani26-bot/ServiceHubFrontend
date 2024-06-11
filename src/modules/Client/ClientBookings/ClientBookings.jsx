@@ -22,7 +22,7 @@ export default function ClientBookings() {
       const response = dispatch(fetchClientBookings({ userId, authToken }));
       console.log(response);
     }
-  }, [dispatch]);
+  }, [dispatch, authToken, userId]);
 
   const handleReview = (bookId, serviceId, userId) => {
     // Handle review logic here

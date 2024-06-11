@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
   const handleSearch = () => {
     dispatch(searchServiceByName({ name: searchQuery, authToken }));
   };
