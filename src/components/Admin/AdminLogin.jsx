@@ -135,7 +135,7 @@ function AdminLogin() {
             <p>
               Or{" "}
               <a
-                href="/register"
+                href="/adminRegister"
                 className="register-link font-weight-bold fs-6 mb-0"
               >
                 register now!
