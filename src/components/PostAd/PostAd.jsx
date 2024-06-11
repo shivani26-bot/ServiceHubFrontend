@@ -168,7 +168,7 @@ export default function PostAd() {
           }}
         >
           <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-            Create Ad
+            Post Service
           </h2>
 
           {/* noValidate :Allows Custom Form Validation. form data should not be validated by the browser when submitted.  disables the default HTML form validation behavior provided by the browser. */}

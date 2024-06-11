@@ -7,7 +7,9 @@ import { fetchAllServices } from "../../../feature/getAllServicesSlice";
 import ClientServiceCard from "../../../components/ServiceCard/ClientServiceCard";
 
 export default function ClientDashBoard() {
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
+  // const userId = sessionStorage.getItem("userId");
   const services = useSelector((state) => state.getAllServices.items);
   const status = useSelector((state) => state.getAllServices.status);
   const searchResults = useSelector((state) => state.search.results);

@@ -13,7 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 export default function AdminDashBoard() {
   const dispatch = useDispatch();
 
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
+  // const userId = sessionStorage.getItem("userId");
   const pendingRegistration = useSelector(
     (state) => state.pendingRegistration.items
   );

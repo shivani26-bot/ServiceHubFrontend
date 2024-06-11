@@ -14,12 +14,12 @@ export default function CompanyNavigationBar() {
       current: location.pathname === "/companyDashboard" ? true : false,
     },
     {
-      name: "PostAd",
+      name: "PostServices",
       href: "/companyPostAd",
       current: location.pathname === "/companyPostAd" ? true : false,
     },
     {
-      name: "Ads",
+      name: "Services",
       href: "/companyAds",
       current: location.pathname === "/companyAds" ? true : false,
     },

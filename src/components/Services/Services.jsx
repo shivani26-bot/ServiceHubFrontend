@@ -8,8 +8,10 @@ import { ToastContainer } from "react-toastify";
 export default function Services() {
   const dispatch = useDispatch();
 
-  const authToken = useSelector((state) => state.auth.authToken);
-  const userId = useSelector((state) => state.auth.userId);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  // const userId = useSelector((state) => state.auth.userId);
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   const { companyServices, loading, error } = useSelector(
     (state) => state.getCompanyServices
   );

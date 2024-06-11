@@ -8,18 +8,21 @@ import { useNavigate } from "react-router-dom";
 
 export default function ClientBookings() {
   const dispatch = useDispatch();
-  const authToken = useSelector((state) => state.auth.authToken);
-  const userId = useSelector((state) => state.auth.userId);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  // const userId = useSelector((state) => state.auth.userId);
   const reservations = useSelector((state) => state.reservations.items);
   const status = useSelector((state) => state.reservations.status);
-
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   const navigate = useNavigate();
 
   useEffect(() => {
+    // console.log("authuid", authToken, userId);
     if (authToken && userId) {
-      dispatch(fetchClientBookings({ userId, authToken }));
+      const response = dispatch(fetchClientBookings({ userId, authToken }));
+      console.log(response);
     }
-  }, [dispatch, authToken, userId]);
+  }, [dispatch]);
 
   const handleReview = (bookId, serviceId, userId) => {
     // Handle review logic here

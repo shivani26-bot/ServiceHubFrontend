@@ -9,8 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function CompanyDashBoard() {
   const dispatch = useDispatch();
-  const authToken = useSelector((state) => state.auth.authToken);
-  const serviceProviderId = useSelector((state) => state.auth.userId); // Assuming userId is the service provider ID
+  // const authToken = useSelector((state) => state.auth.authToken);
+  const authToken = sessionStorage.getItem("authToken");
+  const serviceProviderId = sessionStorage.getItem("userId");
+  // const serviceProviderId = useSelector((state) => state.auth.userId); // Assuming userId is the service provider ID
   const bookings = useSelector((state) => state.serviceProviderBookings.items);
   const status = useSelector((state) => state.serviceProviderBookings.status);
   const [localBookings, setLocalBookings] = useState([]);
@@ -113,7 +115,7 @@ export default function CompanyDashBoard() {
         <table>
           <thead>
             <tr>
-              <th>ClientName</th>
+              <th>CustomerName</th>
               <th>Service</th>
               <th>Date</th>
               <th>Status</th>
