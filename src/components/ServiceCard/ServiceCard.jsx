@@ -1,6 +1,6 @@
 import "./ServiceCard.css"; // Assuming you have some CSS for styling
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteService } from "../../feature/deleteServiceSlice";
 
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
@@ -14,9 +14,11 @@ const ServiceCard = ({ service }) => {
   const [showUpdateForm, setShowUpdateForm] = useState(false); // to show the modal form
   const { id, serviceName, price, description, imageUrl } = service;
 
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
 
-  const userId = useSelector((state) => state.auth.userId);
+  // const userId = useSelector((state) => state.auth.userId);
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   const dispatch = useDispatch();
   const notifySuccess = () =>
     toast.success("Service Deleted Successfully!", {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap"; // Assuming you're using React Bootstrap
 import PropTypes from "prop-types";
 import { updateServiceDetails } from "../../feature/updateServiceSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { fetchCompanyServices } from "../../feature/getCompanyServiceSlice";
 import { toast } from "react-toastify";
@@ -11,10 +11,12 @@ import "react-toastify/dist/ReactToastify.css";
 const UpdateServiceForm = ({ service, onUpdate }) => {
   const [updatedService, setUpdatedService] = useState(service);
   const dispatch = useDispatch();
-  const authToken = useSelector((state) => state.auth.authToken);
+  // const authToken = useSelector((state) => state.auth.authToken);
 
-  const userId = useSelector((state) => state.auth.userId);
+  // const userId = useSelector((state) => state.auth.userId);
 
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   const notifySuccess = () =>
     toast.success("Service Updated successfully!", {
       position: "top-right",

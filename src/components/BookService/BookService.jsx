@@ -5,7 +5,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 
 import "./BookService.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addBooking } from "../../feature/addBookingsSlice";
@@ -15,8 +15,10 @@ export default function BookService() {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const authToken = useSelector((state) => state.auth.authToken);
-  const userId = useSelector((state) => state.auth.userId);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  // const userId = useSelector((state) => state.auth.userId);
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   // console.log("uidauthsid", userId, authToken, serviceId);
   const handleDateChange = (date) => {
     const normalizedDate = new Date(

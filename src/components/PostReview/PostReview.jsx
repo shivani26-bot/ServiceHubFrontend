@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
 import ClientNavigationBar from "../Navigation/ClientNavigationBar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { postReview } from "../../feature/reviewSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";

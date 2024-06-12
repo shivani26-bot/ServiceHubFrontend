@@ -25,8 +25,10 @@ export default function PostAd() {
     img: null,
   });
 
-  const authToken = useSelector((state) => state.auth.authToken);
-  const userId = useSelector((state) => state.auth.userId);
+  // const authToken = useSelector((state) => state.auth.authToken);
+  // const userId = useSelector((state) => state.auth.userId);
+  const authToken = sessionStorage.getItem("authToken");
+  const userId = sessionStorage.getItem("userId");
   const [isValidPrice, setIsValidPrice] = useState(false);
   const [validated, setValidated] = useState(false);
   const [isValidName, setIsValidName] = useState(false);
