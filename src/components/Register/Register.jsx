@@ -5,6 +5,7 @@ import Navigation from "../Navigation/Navigation";
 
 function Register() {
   const navigate = useNavigate();
+
   return (
     <>
       <Navigation />

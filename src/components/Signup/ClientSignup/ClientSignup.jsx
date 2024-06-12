@@ -136,6 +136,17 @@ function ClientSignup() {
     }
   };
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+  };
+
   return (
     <>
       <Navigation />
@@ -202,51 +213,104 @@ function ClientSignup() {
               </Form.Group>
 
               <Form.Group controlId="validationCustomPassword">
-                <Form.Control
-                  required
-                  name="password"
-                  type="password"
-                  className="outline"
-                  placeholder="Password"
-                  value={data.password}
-                  onChange={handleChange}
-                  isInvalid={!isValidPassword && data.password !== ""}
-                  isValid={isValidPassword}
-                />
+                <div className="input-wrapper">
+                  <Form.Control
+                    required
+                    name="password"
+                    // type="password"
+                    type={isPasswordVisible ? "text" : "password"}
+                    // className="outline"
+                    style={{
+                      border: "1px solid #121481",
+                      borderRadius: "5px",
+                      marginTop: "15px",
+                    }}
+                    placeholder="Password"
+                    value={data.password}
+                    onChange={handleChange}
+                    isInvalid={!isValidPassword && data.password !== ""}
+                    isValid={isValidPassword}
+                  />
+                  <img
+                    src={isPasswordVisible ? "/hide.png" : "/show.png"}
+                    alt="Toggle visibility"
+                    onClick={togglePasswordVisibility}
+                    style={{
+                      position: "absolute",
+                      right: "30px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                      width: "20px", // Adjust the size as needed
+                      height: "20px",
+                    }}
+                  />
+                </div>
                 {isValidPassword && (
                   <Form.Control.Feedback type="valid"></Form.Control.Feedback>
                 )}
-                {!isValidPassword && data.password !== "" && (
+                {/* {!isValidPassword && data.password !== "" && (
                   <Form.Control.Feedback type="invalid" className="mb-1">
                     Password must be 8 characters!
                     <br /> Only !@#$_ special characters allowed!
                     <br /> Combaination of !@#$_ special characters is not
                     allowed!
                   </Form.Control.Feedback>
-                )}
+                )} */}
+                <p
+                  style={{
+                    color: "gray",
+                    marginBottom: "5px",
+                  }}
+                >
+                  Password must be 8 characters!
+                  <br /> Only !@#$_ special characters allowed!
+                </p>
               </Form.Group>
 
               <Form.Group controlId="validationCustomConfirmPassword">
-                <Form.Control
-                  required
-                  name="confirmPassword"
-                  type="password"
-                  className="outline"
-                  placeholder="Confirm Password"
-                  value={data.confirmPassword}
-                  onChange={handleChange}
-                  isInvalid={!isPasswordMatch && data.confirmPassword !== ""}
-                  isValid={isPasswordMatch}
-                />
+                <div className="input-wrapper">
+                  <Form.Control
+                    required
+                    name="confirmPassword"
+                    // type="password"
+                    type={isConfirmPasswordVisible ? "text" : "password"}
+                    // className="outline"
+                    style={{
+                      border: "1px solid #121481",
+                      borderRadius: "5px",
+                      marginBottom: "15px",
+                    }}
+                    placeholder="Confirm Password"
+                    value={data.confirmPassword}
+                    onChange={handleChange}
+                    isInvalid={!isPasswordMatch && data.confirmPassword !== ""}
+                    isValid={isPasswordMatch}
+                  />
+                  <img
+                    src={isConfirmPasswordVisible ? "/hide.png" : "/show.png"}
+                    alt="Toggle visibility"
+                    onClick={toggleConfirmPasswordVisibility}
+                    style={{
+                      position: "absolute",
+                      right: "30px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                      width: "20px", // Adjust the size as needed
+                      height: "20px",
+                    }}
+                  />
+                </div>
                 {isPasswordMatch && (
                   <Form.Control.Feedback type="valid"></Form.Control.Feedback>
                 )}
-
+                {/* 
                 {!isPasswordMatch && data.confirmPassword !== "" && (
                   <Form.Control.Feedback type="invalid" className="mb-1">
                     Password doesn't match!
                   </Form.Control.Feedback>
-                )}
+                )} */}
               </Form.Group>
 
               <Form.Group a controlId="formTelephone">

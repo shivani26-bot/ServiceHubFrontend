@@ -36,7 +36,7 @@ export default function ClientNavigationBar() {
         <div className="brand-images">
           <img src="/ServiceHub4.PNG" alt="Second Logo" className="logo" />
         </div>
-        <Navbar.Brand className="brand">ServiceHub</Navbar.Brand>
+        <Navbar.Brand className="brand">Customer Portal</Navbar.Brand>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           style={{ borderColor: "white" }}

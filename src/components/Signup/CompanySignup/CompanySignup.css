@@ -4,3 +4,9 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.input-wrapper {
+  position: relative;
+  /* display: flex;
+  align-items: center; */
+  /* flex-direction: column; */
+}

@@ -93,6 +93,12 @@ function AdminLogin() {
     }
   }, [authToken, userId, userData, navigate]);
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <>
       <AdminMainNavigation />
@@ -121,9 +127,26 @@ function AdminLogin() {
                 <Form.Control
                   name="password"
                   value={data.password}
-                  type="password"
+                  // type="password"
+                  type={isPasswordVisible ? "text" : "password"}
                   placeholder="Password"
                   onChange={handleChange}
+                />
+                <img
+                  src={
+                    isPasswordVisible ? "public/hide.png" : "public/show.png"
+                  }
+                  alt="Toggle visibility"
+                  onClick={togglePasswordVisibility}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "60%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                    width: "24px", // Adjust the size as needed
+                    height: "24px",
+                  }}
                 />
               </FloatingLabel>
             </div>
